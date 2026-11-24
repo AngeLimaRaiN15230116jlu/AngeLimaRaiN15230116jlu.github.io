@@ -1,0 +1,1398 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>沃飞长空 AE200：技术、场景与市场可行性 | AEROFUGIA AE200</title>
+<meta name="description" content="以证据分级方法评估沃飞长空 AE200 倾转旋翼 eVTOL 的构型、子系统、关键技术、适航路径、应用场景与市场可行性。">
+<meta property="og:title" content="沃飞长空 AE200：技术、场景与市场可行性">
+<meta property="og:description" content="八轴内四倾转、四包电池、2027 年取证目标：一次关于构型折中、冗余账本与单位经济的系统评估。">
+<meta property="og:type" content="article">
+<meta property="og:image" content="assets/ae200-hero.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23102d3c'/%3E%3Cpath d='M14 40h36M32 18v28M22 26l10-8 10 8' stroke='%23e8eff2' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "沃飞长空 AE200：技术、场景与市场可行性",
+  "description": "以证据分级方法评估沃飞长空 AE200 倾转旋翼 eVTOL 的构型、子系统、关键技术、适航路径、应用场景与市场可行性。",
+  "datePublished": "2026-11-24",
+  "dateModified": "2026-11-24",
+  "inLanguage": ["zh-CN", "en"],
+  "about": ["eVTOL", "Volant Aerotech", "AE200", "低空经济", "适航审定"]
+}
+</script>
+<style>
+/* ============ Design tokens ============ */
+:root{
+  --ink:#111214;
+  --ink-2:#252527;
+  --muted:#6e6e73;
+  --muted-2:#5c7783;
+  --line:#d8d8dc;
+  --line-soft:#e6e6e9;
+  --soft:#f5f5f7;
+  --blue:#173b4d;
+  --blue-deep:#102d3c;
+  --blue-soft:#e8eff2;
+  --blue-mid:#496672;
+  --nav-h:56px;
+  --max:1320px;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
+  --mono:"SF Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  font-family:var(--font);
+  font-size:16.5px;line-height:1.8;
+  color:var(--ink);background:#fff;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:underline;text-decoration-color:#b9b9bf;text-underline-offset:.16em;transition:text-decoration-color .2s}
+a:hover{text-decoration-color:currentColor}
+ul,ol{list-style:none}
+strong{font-weight:650}
+::selection{background:#cfe0e7;color:#0b1e27}
+
+/* ============ Bilingual ============ */
+.cn{display:inline}
+.en{display:none}
+body.E .cn{display:none}
+body.E .en{display:inline}
+.cn-block{display:block}
+.en-block{display:none}
+body.E .cn-block{display:none}
+body.E .en-block{display:block}
+.cn-flex{display:flex}
+.en-flex{display:none}
+body.E .cn-flex{display:none}
+body.E .en-flex{display:flex}
+
+/* ============ Nav ============ */
+.site-nav{
+  position:fixed;inset:0 0 auto 0;z-index:100;height:var(--nav-h);
+  background:rgba(16,45,60,.97);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.12);
+}
+.nav-inner{
+  max-width:var(--max);margin:0 auto;height:100%;
+  padding:0 clamp(18px,4vw,48px);
+  display:flex;align-items:center;gap:24px;
+}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;min-width:0}
+.brand svg{width:26px;height:26px;flex:none}
+.brand-name{font-size:13px;font-weight:600;letter-spacing:.02em;white-space:nowrap}
+.brand-name > span{display:block;font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#9fb9c4;line-height:1.3}
+.nav-links{margin-left:auto;display:flex;align-items:center;gap:clamp(12px,2vw,26px)}
+.nav-links a{color:#d6e2e7;font-size:12.5px;text-decoration:none;letter-spacing:.01em}
+.nav-links a:hover{color:#fff}
+.lang-btn{
+  border:1px solid rgba(255,255,255,.35);background:transparent;color:#e8eff2;
+  font:600 11px/1 var(--font);letter-spacing:.08em;padding:7px 11px;border-radius:999px;
+  cursor:pointer;transition:background .2s,border-color .2s;
+}
+.lang-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.6)}
+.nav-toggle{display:none;margin-left:auto;background:none;border:0;width:32px;height:32px;cursor:pointer;position:relative}
+.nav-toggle i{position:absolute;left:4px;right:4px;height:1.5px;background:#e8eff2;transition:transform .25s,opacity .2s}
+.nav-toggle i:nth-child(1){top:9px}
+.nav-toggle i:nth-child(2){top:15px}
+.nav-toggle i:nth-child(3){top:21px}
+.nav-open .nav-toggle i:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.nav-open .nav-toggle i:nth-child(2){opacity:0}
+.nav-open .nav-toggle i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.progress{position:fixed;top:var(--nav-h);left:0;height:2px;width:0;background:#8dbfd3;z-index:101;transition:width .1s linear}
+
+/* ============ Hero ============ */
+.hero{background:var(--blue-soft);padding:calc(var(--nav-h) + clamp(52px,7vw,92px)) 0 clamp(48px,6vw,80px)}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(18px,4vw,48px);width:100%}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(320px,.88fr);gap:clamp(36px,6vw,84px);align-items:center}
+.kicker{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5c7783;line-height:1.5}
+.hero h1{
+  margin:16px 0 0;color:var(--blue-deep);
+  font-size:clamp(38px,4.9vw,66px);font-weight:600;line-height:1.02;letter-spacing:-.05em;
+}
+.hero h1 em{font-style:normal;color:#2c5a6e}
+body.E .hero h1{font-size:clamp(34px,4vw,54px);letter-spacing:-.045em}
+.deck{max-width:720px;margin:24px 0 0;color:#3f5f6c;font-size:clamp(16px,1.5vw,19px);line-height:1.72}
+.byline{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:28px;color:#5c7783;font-size:11.5px;line-height:1.5}
+.byline b{font-weight:600;color:#35525f}
+.hero-figure{margin:0;position:relative}
+.hero-figure img{width:100%;aspect-ratio:3/2;object-fit:cover;border:1px solid rgba(23,59,77,.25);background:#0e1a20}
+.hero-figure figcaption{margin-top:9px;color:#5c7783;font-size:10px;line-height:1.55}
+.hero-figure .tag{
+  position:absolute;top:12px;left:12px;background:rgba(16,45,60,.86);color:#e8eff2;
+  font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:5px 9px;border-radius:2px;
+}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:40px 0 0;border-top:1px solid rgba(23,59,77,.22)}
+.facts>div{padding:16px 16px 0 0;min-width:0}
+.facts>div+div{padding-left:16px;border-left:1px solid rgba(23,59,77,.14)}
+.facts dt{font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#617a85;margin-bottom:6px}
+.facts dd{font-size:13px;line-height:1.45;color:var(--blue-deep)}
+
+/* ============ Shell ============ */
+.shell{
+  display:grid;grid-template-columns:minmax(180px,224px) minmax(0,820px) minmax(170px,214px);
+  gap:clamp(28px,4.4vw,64px);align-items:start;
+  padding:clamp(48px,6vw,84px) 0 0;
+}
+.toc,.rail{position:sticky;top:calc(var(--nav-h) + 26px)}
+.toc{padding-right:8px}
+.toc-title,.rail-title{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+.toc ol{counter-reset:toc}
+.toc li+li{margin-top:8px}
+.toc a{display:block;font-size:12px;line-height:1.5;color:var(--muted);text-decoration:none;padding-left:0;transition:color .2s}
+.toc a:hover{color:var(--ink)}
+.toc a.active{color:var(--blue-deep);font-weight:600}
+.toc .n{display:inline-block;width:20px;color:#9a9aa1;font-variant-numeric:tabular-nums}
+.rail{padding-left:16px;border-left:1px solid var(--line)}
+.rail ul{display:grid;gap:13px}
+.rail li{font-size:10.5px;line-height:1.55;color:var(--muted)}
+.rail strong{display:block;font-size:11.5px;color:var(--ink);margin-bottom:2px}
+.rail .swatch{display:inline-block;width:8px;height:8px;margin-right:6px;border:1px solid var(--blue)}
+.rail .swatch.s2{background:var(--blue)}
+.rail .swatch.s3{border-style:dashed}
+.rail-note{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:10px;color:var(--muted)}
+
+/* ============ Article ============ */
+.article{min-width:0}
+.article>section{scroll-margin-top:calc(var(--nav-h) + 24px)}
+.sec{padding:0 0 clamp(46px,6vw,72px);margin-bottom:clamp(46px,6vw,72px);border-bottom:1px solid var(--line)}
+.sec:last-of-type{border-bottom:0}
+.sec-head{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;margin-bottom:26px}
+.sec-num{padding-top:6px;font-size:10.5px;font-weight:600;letter-spacing:.08em;color:var(--muted);font-variant-numeric:tabular-nums}
+h2{font-size:clamp(27px,3vw,36px);font-weight:600;line-height:1.16;letter-spacing:-.04em;color:var(--ink)}
+h2 .sub{display:block;margin-top:7px;font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--muted);text-transform:uppercase}
+h3{font-size:20px;font-weight:600;line-height:1.4;margin:38px 0 12px;letter-spacing:-.02em}
+h4{font-size:15.5px;font-weight:650;margin:26px 0 8px}
+.article p{margin:0 0 17px;color:var(--ink-2);font-size:16.5px;line-height:1.82}
+.article .lede{font-size:18.5px;line-height:1.72;color:#2c3a41;margin-bottom:24px}
+.article ul,.article ol{margin:0 0 20px;padding-left:20px}
+.article ul{list-style:disc}
+.article ol{list-style:decimal}
+.article li{margin-bottom:8px;font-size:16px;line-height:1.75}
+.article small{font-size:12.5px;color:var(--muted)}
+.cite{font-size:.62em;font-weight:700;line-height:0;vertical-align:super;text-decoration:none;color:#5c7783;margin-left:1px}
+.cite:hover{color:var(--blue-deep);text-decoration:underline}
+
+/* ============ Components ============ */
+.exec{margin:0 0 26px;padding:clamp(20px,3vw,30px);border:1px solid var(--line);background:var(--soft)}
+.exec h2{font-size:23px;letter-spacing:-.02em;margin-bottom:14px}
+.exec ol{counter-reset:ex;padding:0;margin:0}
+.exec li{counter-increment:ex;position:relative;padding-left:30px;font-size:15.3px;line-height:1.72;margin-bottom:11px;list-style:none}
+.exec li::before{content:counter(ex);position:absolute;left:0;top:0;font-size:10px;font-weight:700;color:#5c7783;border:1px solid #9db2bb;border-radius:50%;width:18px;height:18px;display:grid;place-items:center;margin-top:5px}
+.exec li:last-child{margin-bottom:0}
+
+.stat-band{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:30px 0 8px}
+.stat-band>div{padding:20px 16px;min-width:0}
+.stat-band>div+div{border-left:1px solid var(--line)}
+.stat-band b{display:block;font-size:clamp(28px,3.6vw,44px);font-weight:600;line-height:1;letter-spacing:-.045em;color:var(--blue-deep);margin-bottom:8px;font-variant-numeric:tabular-nums}
+.stat-band b i{font-style:normal;font-size:.42em;font-weight:600;letter-spacing:0;margin-left:2px;color:#496672}
+.stat-band > div > span{display:block;font-size:10.5px;line-height:1.45;color:var(--muted)}
+
+.table-wrap{width:100%;overflow-x:auto;border:1px solid var(--line);margin:22px 0 10px;background:#fff}
+table{width:100%;min-width:640px;border-collapse:collapse;font-size:13.5px;line-height:1.55}
+th,td{padding:12px 13px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--soft);font-size:11.5px;font-weight:650;letter-spacing:.02em;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tbody tr:hover{background:#fafafb}
+caption{caption-side:top;text-align:left;padding:0 0 9px;font-size:11px;color:var(--muted);letter-spacing:.02em}
+.tbl-note{font-size:11px;color:var(--muted);line-height:1.6;margin:6px 0 26px}
+
+.figure{margin:30px 0 26px}
+.figure img,.figure svg{width:100%;height:auto;border:1px solid var(--line);background:#fff}
+.figure figcaption{margin-top:9px;font-size:11px;line-height:1.6;color:var(--muted)}
+.figure figcaption b{color:#3f5c68;font-weight:600}
+.figure-wide{position:relative;left:50%;width:min(1080px,calc(100vw - 40px));transform:translateX(-50%)}
+
+.callout{margin:26px 0;padding:18px 20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--soft)}
+.callout > b{display:block;font-size:12.5px;letter-spacing:.02em;margin-bottom:6px}
+.callout p{font-size:14.5px;line-height:1.7;color:#4e5359;margin:0}
+
+.quote{margin:30px 0;padding:2px 0 2px 20px;border-left:3px solid var(--blue)}
+.quote p{font-size:19px;line-height:1.55;color:var(--blue-deep);margin:0;letter-spacing:-.01em}
+.quote footer{margin-top:10px;font-size:11px;color:var(--muted)}
+
+.chip{display:inline-flex;align-items:center;gap:5px;padding:2px 7px;border:1px solid var(--line);background:var(--soft);font-size:10px;font-weight:600;letter-spacing:.03em;color:var(--muted);white-space:nowrap;vertical-align:1px}
+.chip.off{border-color:#6d8a96;background:#eef4f6;color:var(--blue-deep)}
+.chip.est{border-style:dashed;background:#fff}
+.chip.open{border-color:#c9a227;background:#fdf8e7;color:#7a5f00}
+.chip.good{background:#eef4f6;border-color:#6d8a96;color:var(--blue-deep)}
+
+.timeline{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:26px 0}
+.timeline>div{padding:16px 12px;min-width:0}
+.timeline>div+div{border-left:1px solid var(--line)}
+.timeline time{display:block;font-size:10.5px;font-weight:700;color:var(--muted);margin-bottom:8px;font-variant-numeric:tabular-nums}
+.timeline strong{display:block;font-size:12.5px;line-height:1.4}
+.timeline em{display:block;margin-top:5px;font-size:10px;font-style:normal;color:var(--muted);line-height:1.45}
+
+.arch{display:grid;gap:10px;margin:24px 0}
+.arch-row{display:grid;grid-template-columns:112px minmax(0,1fr);gap:12px;align-items:stretch}
+.arch-label{display:flex;flex-direction:column;justify-content:center;padding:12px;border:1px solid var(--line);background:var(--soft);font-size:11px;font-weight:600;line-height:1.4;text-align:center}
+.arch-label span{font-weight:400;font-size:9.5px;color:var(--muted);margin-top:3px}
+.arch-nodes{display:grid;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:8px}
+.node{display:flex;flex-direction:column;justify-content:center;min-height:66px;padding:10px 12px;border:1px solid var(--line);background:#fff;font-size:12px;line-height:1.45;text-align:center}
+.node b{font-weight:600}
+.node > span{display:block;font-size:9.5px;color:var(--muted);margin-top:2px}
+
+.matrix{display:grid;grid-template-columns:150px repeat(4,minmax(64px,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line);font-size:11px;margin:22px 0}
+.matrix>div{min-height:52px;padding:9px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.35}
+.matrix .mh{background:var(--soft);font-weight:650;font-size:10.5px}
+.matrix .ml{justify-content:flex-start;text-align:left;font-weight:600}
+.lv4{background:#12242d;color:#fff}
+.lv3{background:#415d68;color:#fff}
+.lv2{background:#9fb0b7;color:#10202a}
+.lv1{background:#dfe5e7;color:#2b2b2e}
+.lv0{background:#f7f7f8;color:#6e6e73}
+.matrix-legend{display:flex;flex-wrap:wrap;gap:10px;font-size:10px;color:var(--muted);margin-top:-14px;margin-bottom:24px}
+.matrix-legend i{display:inline-block;width:10px;height:10px;margin-right:4px;border:1px solid #ccd3d6;vertical-align:-1px}
+
+.trl{margin:22px 0}
+.trl-row{display:grid;grid-template-columns:150px minmax(0,1fr) 42px;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line-soft);font-size:12.5px}
+.trl-row:first-child{border-top:1px solid var(--line)}
+.trl-bar{height:7px;background:#edeef0;position:relative;overflow:hidden}
+.trl-bar i{position:absolute;inset:0 auto 0 0;background:var(--blue)}
+.trl-row b{font-size:11px;text-align:right;font-variant-numeric:tabular-nums}
+
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:22px 0}
+.card{border:1px solid var(--line);padding:16px 17px;background:#fff}
+.card .idx{font-size:9.5px;letter-spacing:.1em;color:var(--muted);display:block;margin-bottom:9px}
+.card h4{margin:0 0 6px;font-size:14.5px}
+.card p{font-size:12.8px;line-height:1.62;color:#5c6167;margin:0}
+
+.kv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border:1px solid var(--line);margin:22px 0}
+.kv>div{padding:12px 14px;border-bottom:1px solid var(--line-soft)}
+.kv>div:nth-child(odd){border-right:1px solid var(--line-soft)}
+.kv dt{font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.kv dd{font-size:13px;line-height:1.5}
+.kv .wide{grid-column:1/-1;border-right:0}
+
+.references{margin-top:8px;padding-left:24px;list-style:decimal}
+.references li{font-size:12.3px;line-height:1.7;color:#5a5f66;margin-bottom:9px;padding-left:2px;overflow-wrap:anywhere}
+.references li:target{background:#fdf8e7}
+.references a{word-break:break-word;text-decoration-color:#c3c8cc}
+.ref-cat{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:24px 0 10px;font-weight:650}
+
+.footer{background:var(--soft);border-top:1px solid var(--line);margin-top:clamp(50px,7vw,90px);padding:36px 0 46px}
+.footer-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px}
+.footer p{font-size:11.5px;line-height:1.7;color:var(--muted);margin:0 0 6px}
+.footer b{color:#4b5157;font-weight:600}
+.footer .backlink{font-size:11.5px;font-weight:600;text-decoration:none;color:var(--blue-deep)}
+.footer .backlink:hover{text-decoration:underline}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ Responsive ============ */
+@media (max-width:1120px){
+  .shell{grid-template-columns:minmax(0,820px);justify-content:center}
+  .toc{display:none}
+  .rail{position:static;padding:22px 0 0;border-left:0;border-top:1px solid var(--line)}
+  .rail ul{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+}
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .hero-figure{order:-1}
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .facts>div:nth-child(3){padding-left:0;border-left:0;border-top:1px solid rgba(23,59,77,.14)}
+  .facts>div:nth-child(4){border-top:1px solid rgba(23,59,77,.14)}
+  .timeline{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .timeline>div:nth-child(4){border-left:0;border-top:1px solid var(--line)}
+  .timeline>div:nth-child(5),.timeline>div:nth-child(6){border-top:1px solid var(--line)}
+  .stat-band{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat-band>div:nth-child(3){border-left:0;border-top:1px solid var(--line)}
+  .stat-band>div:nth-child(4){border-top:1px solid var(--line)}
+  .nav-links{
+    position:fixed;top:var(--nav-h);left:0;right:0;background:var(--blue-deep);
+    flex-direction:column;align-items:flex-start;gap:0;padding:8px 22px 18px;
+    display:none;border-bottom:1px solid rgba(255,255,255,.15);
+  }
+  .nav-open .nav-links{display:flex}
+  .nav-links a{display:block;padding:10px 0;font-size:13px;width:100%}
+  .nav-toggle{display:block}
+  .lang-btn{margin-left:0;margin-top:6px}
+  .brand-name > span{display:none}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .article p{font-size:16px;line-height:1.78}
+  .hero h1{font-size:clamp(32px,8.4vw,42px)}
+  .hero-figure img{aspect-ratio:4/3}
+  .facts{grid-template-columns:1fr}
+  .facts>div{padding:13px 0}
+  .facts>div+div{padding-left:0;border-left:0;border-top:1px solid rgba(23,59,77,.14)}
+  .kicker{font-size:10px}
+  .byline{font-size:10.5px;gap:4px 14px}
+  .sec-head{grid-template-columns:1fr;gap:6px}
+  .sec-num{padding-top:0}
+  .arch-row{grid-template-columns:1fr}
+  .arch-label{min-height:0;padding:6px 0;border:0;border-bottom:1px solid var(--line);background:none;justify-content:flex-start;font-size:10.5px;text-align:left;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .cards,.kv{grid-template-columns:1fr}
+  .kv>div:nth-child(odd){border-right:0}
+  .timeline{grid-template-columns:1fr}
+  .timeline>div+div{border-left:0;border-top:1px solid var(--line)}
+  .matrix{grid-template-columns:110px repeat(4,minmax(58px,1fr));min-width:520px}
+  .matrix-wrap{overflow-x:auto;border:0}
+  .matrix-wrap .matrix{border:1px solid var(--line)}
+  .rail ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .figure-wide{width:calc(100vw - 32px)}
+  .footer-grid{grid-template-columns:1fr}
+  .stat-band b{font-size:30px}
+}
+@media print{
+  .site-nav,.toc,.rail,.progress,.lang-btn{display:none!important}
+  body{font-size:11pt}
+  .hero{padding-top:20px}
+  .shell{display:block}
+  .sec{page-break-inside:auto}
+  .figure,.table-wrap{page-break-inside:avoid}
+  a{text-decoration:none;color:#000}
+}
+@media (prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+
+<body>
+<div class="progress" id="progress"></div>
+<nav class="site-nav" id="siteNav">
+  <div class="nav-inner">
+    <a class="brand" href="#top" aria-label="AE200 案例研究首页">
+      <svg viewBox="0 0 32 32" aria-hidden="true" fill="none">
+        <rect x="1" y="1" width="30" height="30" stroke="#8fb6c6" stroke-width="1.2"/>
+        <path d="M6 22h20M16 7v15M10 13l6-5 6 5" stroke="#e8eff2" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-name">AE200<span>CASE 02 · EVTOL</span></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="打开导航" aria-expanded="false"><i></i><i></i><i></i></button>
+    <div class="nav-links" id="navLinks">
+      <a href="#summary"><span class="cn">摘要</span><span class="en">Summary</span></a>
+      <a href="#company"><span class="cn">公司</span><span class="en">Company</span></a>
+      <a href="#product"><span class="cn">型号</span><span class="en">Product</span></a>
+      <a href="#technology"><span class="cn">技术</span><span class="en">Technology</span></a>
+      <a href="#safety"><span class="cn">安全</span><span class="en">Safety</span></a>
+      <a href="#scenarios"><span class="cn">场景</span><span class="en">Scenarios</span></a>
+      <a href="#market"><span class="cn">市场</span><span class="en">Market</span></a>
+      <a href="#references"><span class="cn">参考</span><span class="en">Refs</span></a>
+      <button class="lang-btn" id="langBtn" type="button" aria-label="切换中英文">EN</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="kicker"><span class="cn">飞行汽车技术基础 · 案例 02</span><span class="en">Fundamentals of Flying Vehicle Technology · Case 02</span></p>
+        <h1>
+          <span class="cn">沃飞长空 AE200：<br>技术、场景与市场可行性</span>
+          <span class="en">AEROFUGIA AE200:<br>Technology, Operations and Market Feasibility</span>
+        </h1>
+        <p class="deck cn">它已经完成全尺寸、全重量、全包线的倾转过渡，却仍未拿到型号合格证；它有千余架订单储备，却还没有交付一架。真正值得研究的，是“八轴内四倾转”的构型折中、四个电池包的冗余账本，以及 2027 年取证之后，谁为每座公里买单。</p>
+        <p class="deck en">It has flown a full-scale, full-weight, full-envelope tilt transition, yet holds no type certificate. It reports over a thousand commitments, yet has delivered none. The real questions are the compromise embedded in its eight-axis, four-tilt layout, the redundancy ledger of four battery packs, and who pays per seat-kilometre after certification.</p>
+        <div class="byline">
+          <span><b><span class="cn">编制</span><span class="en">Prepared by</span></b> <span class="cn">低空交通案例研究组</span><span class="en">Low-Altitude Mobility Case Group</span></span>
+          <span><b><span class="cn">证据截止</span><span class="en">Evidence cut-off</span></b> 2026-11-24</span>
+          <span><b><span class="cn">版本</span><span class="en">Version</span></b> 1.0</span>
+          <span><b><span class="cn">方法</span><span class="en">Method</span></b> <span class="cn">证据分级 + 工程估算</span><span class="en">Evidence grading + engineering estimates</span></span>
+        </div>
+      </div>
+      <figure class="hero-figure">
+        <span class="tag">AE200-100 · B-0AZP</span>
+        <img src="assets/ae200-hero.jpg" alt="沃飞长空 AE200 批产构型机在机库中" width="1600" height="1067">
+        <figcaption>
+          <span class="cn">沃飞长空 AE200 批产构型机。图片来自沃飞长空官方媒体素材（aerofugia.com），仅用于识别研究对象，不构成对其性能或适航状态的背书。</span>
+          <span class="en">AE200 production-configuration aircraft. Image from official Volant Aerotech media assets (aerofugia.com), used solely to identify the subject.</span>
+        </figcaption>
+      </figure>
+    </div>
+    <dl class="facts">
+      <div><dt><span class="cn">系列航程</span><span class="en">Series range</span></dt><dd><span class="cn">200 km（设计值）</span><span class="en">200 km (design)</span></dd></div>
+      <div><dt><span class="cn">巡航速度</span><span class="en">Cruise speed</span></dt><dd><span class="cn">230 km/h（任务 248）</span><span class="en">230 km/h (mission 248)</span></dd></div>
+      <div><dt><span class="cn">最大起飞重量</span><span class="en">MTOW</span></dt><dd><span class="cn">2,500 kg（媒体口径）</span><span class="en">2,500 kg (reported)</span></dd></div>
+      <div><dt><span class="cn">座级</span><span class="en">Seating</span></dt><dd><span class="cn">3–6 座灵活布局</span><span class="en">3–6 seats, flexible</span></dd></div>
+    </dl>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+  <div class="shell">
+    <aside class="toc" aria-label="文章目录">
+      <p class="toc-title"><span class="cn">文章目录</span><span class="en">Contents</span></p>
+      <ol>
+        <li><a href="#summary"><span class="n">00</span><span class="cn">执行摘要</span><span class="en">Executive summary</span></a></li>
+        <li><a href="#method"><span class="n">01</span><span class="cn">研究设计与证据边界</span><span class="en">Method and evidence</span></a></li>
+        <li><a href="#company"><span class="n">02</span><span class="cn">公司与项目路径</span><span class="en">Company and programme</span></a></li>
+        <li><a href="#product"><span class="n">03</span><span class="cn">型号与产品定义</span><span class="en">Product definition</span></a></li>
+        <li><a href="#technology"><span class="n">04</span><span class="cn">系统架构与关键技术</span><span class="en">Architecture and technology</span></a></li>
+        <li><a href="#feasibility"><span class="n">05</span><span class="cn">技术可行性</span><span class="en">Technical feasibility</span></a></li>
+        <li><a href="#safety"><span class="n">06</span><span class="cn">安全、适航与 SOTIF</span><span class="en">Safety and airworthiness</span></a></li>
+        <li><a href="#scenarios"><span class="n">07</span><span class="cn">应用场景</span><span class="en">Scenarios</span></a></li>
+        <li><a href="#market"><span class="n">08</span><span class="cn">市场可行性</span><span class="en">Market feasibility</span></a></li>
+        <li><a href="#competition"><span class="n">09</span><span class="cn">竞争格局</span><span class="en">Competition</span></a></li>
+        <li><a href="#roadmap"><span class="n">10</span><span class="cn">工程化路线图</span><span class="en">Roadmap</span></a></li>
+        <li><a href="#limits"><span class="n">11</span><span class="cn">局限与未决问题</span><span class="en">Limitations</span></a></li>
+        <li><a href="#references"><span class="n">12</span><span class="cn">参考文献</span><span class="en">References</span></a></li>
+      </ol>
+    </aside>
+
+    <article class="article">
+
+      <section class="sec" id="summary">
+        <div class="sec-head">
+          <div class="sec-num">00</div>
+          <div><h2><span class="cn">执行摘要</span><span class="en">Executive summary</span><span class="sub">What the evidence supports — and what it does not</span></h2></div>
+        </div>
+
+        <div class="exec">
+          <ol>
+            <li>
+              <span class="cn"><b>AE200-100 已进入 CAAC 型号合格证审定的第四阶段，但截至 2026 年 11 月 24 日没有公开的 TC 或 PC 颁证记录。</b>企业口径为“2026—2027 年完成取证”，2026 年下半年媒体多表述为“预计 2027 年”。因此本文把它定义为“全球第一梯队的取证冲刺者”，而不是“已取证、可载客的商业产品”。<a class="cite" href="#ref1">[1]</a><a class="cite" href="#ref7">[7]</a></span>
+              <span class="en"><b>AE200-100 is in Stage 4 of CAAC type certification, with no public TC or PC issuance as of 24 November 2026.</b> The company targets 2026–2027; reporting since mid-2026 mostly says 2027. It is a front-runner in certification, not yet a certificated, passenger-carrying product.</span>
+            </li>
+            <li>
+              <span class="cn"><b>“八轴内四倾转”是一个工程折中，而不是效率最优解。</b>四个内侧旋翼在垂直起降与巡航之间倾转，四个外侧旋翼在巡航段顺桨；好处是保留独立升力冗余、降低过渡段风险，代价是巡航时携带不产生升力的旋翼与短舱重量。它更接近“安全优先的部分倾转”，而非 Joby 式全倾转。</span>
+              <span class="en"><b>The eight-axis, four-tilt layout is a compromise, not an efficiency optimum.</b> Four inboard rotors tilt; four outboard rotors feather in cruise. It preserves independent lift redundancy and reduces transition risk, at the cost of carrying non-lifting rotors and nacelles.</span>
+            </li>
+            <li>
+              <span class="cn"><b>冗余账本是它最强的工程叙事：</b>八套双余度分布式电驱、四组相互独立的电池包、DAL-B 级电池系统（电芯失效率 10⁻⁸—10⁻⁹）、10⁻⁸/FH 的航电平台指标、20G 坠撞模组、整机水上漂浮设计。但这些是<b>分系统指标</b>；整机灾难性失效概率目标、过渡走廊边界、倾转机构寿命均未公开。</span>
+              <span class="en"><b>Its strongest engineering story is redundancy:</b> eight dual-redundant drives, four independent packs, DAL-B batteries (10⁻⁸–10⁻⁹ cell failure), 10⁻⁸/FH avionics, 20G crash-tolerant modules and flotation. Yet these are subsystem figures; whole-aircraft catastrophic targets, transition corridors and tilt-actuator life remain undisclosed.</span>
+            </li>
+            <li>
+              <span class="cn"><b>技术可行性必须分层判断：</b>构型与过渡已“演示可行”，动力与电池已“工程验证”，量产一致性与运行经济性仍“未证明”。用“能飞”推导“能作为交通工具运营”，是这类案例最常见的逻辑跳跃。</span>
+              <span class="en"><b>Feasibility must be layered:</b> configuration and transition are demonstrated; powertrain and battery are engineering-verified; production consistency and operating economics are unproven. “It flies” does not imply “it transports”.</span>
+            </li>
+            <li>
+              <span class="cn"><b>最先成立的是低空文旅与机场接驳，不是城市通勤。</b>200 km 航程与 230 km/h 巡航在“点到点、固定航线、可预期客流”的场景中才有意义；城市通勤受起降点密度、噪声、票价和空域审批四重约束，短期内不具备替代地面交通的条件。</span>
+              <span class="en"><b>Tourism and airport transfers come first, not commuting.</b> 200 km and 230 km/h only pay off on fixed, point-to-point routes with predictable demand; urban commuting faces vertiport density, noise, fare and airspace constraints.</span>
+            </li>
+            <li>
+              <span class="cn"><b>千架订单不是千架收入。</b>公开可查的订单由意向采购、租赁公司框架协议与少量确认订单构成；按 1,500 万元级单机价格、每天 6 班、每年 250 天测算，座公里成本约 6—9 元，显著高于高铁与网约车，需要文旅溢价、机场接驳时间价值或政策补贴才能闭环。</span>
+              <span class="en"><b>A thousand commitments are not a thousand deliveries.</b> Public orders mix intentions, leasing frameworks and a few firm contracts. At a ~¥15m aircraft price, six flights a day and 250 days a year, seat-kilometre cost is roughly ¥6–9 — well above rail or ride-hailing, requiring tourism premiums, time savings or subsidies.</span>
+            </li>
+          </ol>
+        </div>
+
+        <div class="stat-band">
+          <div><b>2022</b><span><span class="cn">中国首张有人驾驶载人 eVTOL TC 受理通知书</span><span class="en">China’s first manned passenger eVTOL TC acceptance</span></span></div>
+          <div><b>2025</b><span><span class="cn">批产构型首架机下线，进入预生产</span><span class="en">First production-configuration aircraft rolled out</span></span></div>
+          <div><b>1,000<i>+</i></b><span><span class="cn">企业口径意向订单，未披露确认比例</span><span class="en">Reported commitments; firm share undisclosed</span></span></div>
+          <div><b>2027</b><span><span class="cn">媒体口径取证目标，非承诺交付日</span><span class="en">Reported certification target, not a delivery date</span></span></div>
+        </div>
+
+        <p class="tbl-note"><span class="cn">数字口径说明：2022 年为 TC 受理而非颁证；2025 年为下线而非交付；1,000+ 为企业公开口径的“千余架”，其中包含意向订单与租赁合作；2027 年为媒体引述的取证目标。四项均不可直接换算为收入或运力。</span><span class="en">Note: 2022 is TC acceptance, not issuance; 2025 is roll-out, not delivery; 1,000+ is the company’s “over a thousand” figure including intentions and leasing agreements; 2027 is a reported target, not a commitment.</span></p>
+
+        <div class="callout">
+          <b><span class="cn">一句话结论</span><span class="en">Bottom line</span></b>
+          <p><span class="cn">AE200 是中国最接近“可商业载客的倾转旋翼 eVTOL”的产品之一，工程成熟度扎实；但它真正的门槛不在飞起来，而在 2027 年前后能否同时闭环<b>适航、产能、单位经济与运行体系</b>这四本账。</span><span class="en">AE200 is one of China’s closest candidates for a commercially carryable tilt-rotor eVTOL, with solid engineering maturity. Its real gate is not flight but whether certification, production, unit economics and operations can close together around 2027.</span></p>
+        </div>
+      </section>
+
+      <section class="sec" id="method">
+        <div class="sec-head">
+          <div class="sec-num">01</div>
+          <div><h2><span class="cn">研究设计与证据边界</span><span class="en">Research design and evidence boundary</span><span class="sub">Evidence grading before narrative</span></h2></div>
+        </div>
+
+        <p class="lede"><span class="cn">本文不是产品宣传册，也不是投资建议。它试图回答一个更窄的问题：在公开证据允许的范围内，AE200 的技术、场景与市场判断，各自能推到多远？</span><span class="en">This is neither a brochure nor investment advice. It asks a narrower question: within the limits of public evidence, how far can claims about AE200’s technology, scenarios and market be pushed?</span></p>
+
+        <p><span class="cn">研究对象限定为沃飞长空 AE200 系列，重点是其首个型别 AE200-100；时间范围为 2016 年法人实体成立至 2026 年 11 月 24 日；证据类型包括企业官网与官方图片、中国民航局文件、地方政府与央媒报道、券商研报、行业媒体、适航标准与竞品公开资料。全文采用“问题—证据—判断—反例—限制”的结构，而不是按企业叙事顺序展开。</span><span class="en">The object is the AE200 series, focused on its first variant, AE200-100, from the 2016 legal entity to 24 November 2026. Sources include official pages and imagery, CAAC documents, state and local media, broker research, industry press, airworthiness standards and competitor disclosures.</span></p>
+
+        <p><span class="cn">最重要的边界有三条。第一，<b>企业披露证明“企业这样说过或做过”，不证明“指标已经第三方验证”</b>；第二，<b>演示飞行证明“在该条件下存在可行解”，不证明全寿命、全环境、全故障空间可用</b>；第三，<b>订单公告证明“存在采购安排”，不证明“已付款、已交付、可确认收入”</b>。本文所有定量推算都标明假设，不冒充官方数据。</span><span class="en">Three boundaries matter. Company disclosure proves what the company said or showed, not third-party validation. A demonstration proves a feasible solution under those conditions, not availability across life, environment and failure space. An order announcement proves an arrangement, not payment, delivery or recognisable revenue.</span></p>
+
+        <div class="table-wrap">
+          <table>
+            <caption><span class="cn">表 1　来源类别与用途</span><span class="en">Table 1. Source classes and use</span></caption>
+            <thead><tr>
+              <th><span class="cn">来源类别</span><span class="en">Class</span></th>
+              <th><span class="cn">代表来源</span><span class="en">Examples</span></th>
+              <th><span class="cn">能证明什么</span><span class="en">What it establishes</span></th>
+              <th><span class="cn">不能证明什么</span><span class="en">What it cannot</span></th>
+            </tr></thead>
+            <tbody>
+              <tr><td><span class="cn">企业官方</span><span class="en">Official</span></td><td><span class="cn">aerofugia.com 产品页、新闻、官方图片</span><span class="en">Product pages, news, imagery</span></td><td><span class="cn">设计参数、项目节点、企业承诺</span><span class="en">Design targets, milestones, commitments</span></td><td><span class="cn">第三方验证、实际运营表现</span><span class="en">Independent validation, field performance</span></td></tr>
+              <tr><td><span class="cn">监管文件</span><span class="en">Regulatory</span></td><td><span class="cn">CAAC 专用条件、CCAR-21/135、SC-VTOL</span><span class="en">CAAC special conditions, CCAR, SC-VTOL</span></td><td><span class="cn">审定基础、安全目标、运行资质</span><span class="en">Certification basis, safety objectives, operating approvals</span></td><td><span class="cn">产品性能、商业成败</span><span class="en">Performance, commercial outcome</span></td></tr>
+              <tr><td><span class="cn">主流媒体</span><span class="en">Press</span></td><td><span class="cn">四川在线、澎湃、上证报、新华财经</span><span class="en">Regional and financial press</span></td><td><span class="cn">时间、地点、订单与融资的交叉核验</span><span class="en">Triangulation of dates, places, orders, funding</span></td><td><span class="cn">技术细节的精确性</span><span class="en">Precision of technical detail</span></td></tr>
+              <tr><td><span class="cn">券商与行业</span><span class="en">Research</span></td><td><span class="cn">华创证券低空经济周报、行业数据库</span><span class="en">Broker low-altitude reports, databases</span></td><td><span class="cn">资本、产能、竞争格局的结构化信息</span><span class="en">Capital, capacity, competitive structure</span></td><td><span class="cn">单机性能、适航结论</span><span class="en">Aircraft performance, certification findings</span></td></tr>
+              <tr><td><span class="cn">标准与论文</span><span class="en">Standards</span></td><td><span class="cn">ISO 26262/21448、DO-311A、GB 38031</span><span class="en">ISO, DO, GB standards</span></td><td><span class="cn">安全机理、符合性方法与评价框架</span><span class="en">Safety mechanisms, compliance methods</span></td><td><span class="cn">某一具体型号的符合性</span><span class="en">Compliance of a specific type</span></td></tr>
+              <tr><td><span class="cn">本文估算</span><span class="en">Estimates</span></td><td><span class="cn">能量、成本、敏感性模型</span><span class="en">Energy, cost and sensitivity models</span></td><td><span class="cn">数量级判断与情景边界</span><span class="en">Order-of-magnitude bounds and scenarios</span></td><td><span class="cn">官方规格、财务预测</span><span class="en">Official specs, financial forecasts</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3><span class="cn">三个必须先拆开的概念</span><span class="en">Three distinctions that must be kept apart</span></h3>
+        <div class="cards">
+          <div class="card"><span class="idx">01 / SERIES</span><h4><span class="cn">型号 ≠ 型别</span><span class="en">Series ≠ variant</span></h4><p><span class="cn">AE200 是一个系列名称，AE200-100 是首个取证型别，未来还有文旅、医疗等型别。系列参数（3—6 座）不能直接当作 AE200-100 的构型。</span><span class="en">AE200 is a series; AE200-100 is the first certification variant. Series parameters cannot be read as the variant’s configuration.</span></p></div>
+          <div class="card"><span class="idx">02 / ORDERS</span><h4><span class="cn">意向 ≠ 确认 ≠ 交付</span><span class="en">Intent ≠ firm ≠ delivery</span></h4><p><span class="cn">“千余架”混合了意向采购、租赁框架与少量确认订单。只有披露付款条件、交付窗口与违约条款的部分，才接近可确认收入。</span><span class="en">The “thousand-plus” figure mixes intentions, leasing frameworks and a few firm orders. Only payment terms and delivery windows approach recognisable revenue.</span></p></div>
+          <div class="card"><span class="idx">03 / CERTIFICATION</span><h4><span class="cn">取证 ≠ 交付 ≠ 运营</span><span class="en">Certification ≠ delivery ≠ operations</span></h4><p><span class="cn">TC 证明型号设计符合适航要求；PC 证明批产一致性；AC 与 OC 才让具体一架飞机、一条航线合法载客。三者之间通常以年计。</span><span class="en">TC approves the design; PC approves production consistency; AC and OC make a specific aircraft and route legal. Years can separate them.</span></p></div>
+          <div class="card"><span class="idx">04 / EVIDENCE</span><h4><span class="cn">“率先”是相对命题</span><span class="en">“First” is relative</span></h4><p><span class="cn">“国内首个、全球第二”完成全包线过渡，成立的前提是限定在有人驾驶、全尺寸、全重量、倾转构型这一组条件下；换一组条件，排序会变。</span><span class="en">“First in China, second globally” holds only under the stated conditions: manned, full-scale, full-weight, tilt-rotor.</span></p></div>
+        </div>
+      </section>
+
+
+      <section class="sec" id="company">
+        <div class="sec-head">
+          <div class="sec-num">02</div>
+          <div><h2><span class="cn">公司与项目路径</span><span class="en">Company and programme path</span><span class="sub">A Geely-backed OEM betting on the hardest configuration</span></h2></div>
+        </div>
+
+        <p class="lede"><span class="cn">理解 AE200，先要理解沃飞长空不是一家从零开始的创业公司，而是“无人机技术资产 + 汽车工业体系 + 地方低空经济政策”三者拼接的产物。</span><span class="en">To understand AE200, start with the fact that Volant is not a from-scratch startup: it is a splice of drone technology, automotive industrial discipline and local low-altitude policy.</span></p>
+
+        <p><span class="cn">沃飞长空（AEROFUGIA）品牌于 2020 年 9 月由傲势科技与吉利太力飞车合并组建，法人实体可追溯至 2016 年；2026 年 3 月完成股份制改造，成为“四川沃飞长空科技股份有限公司”。控股股东为湖北吉利太力飞车有限公司，持股 40.02%，实际控制人为李书福；CEO 兼首席科学家郭亮来自傲势，董事长为徐志豪。<a class="cite" href="#ref15">[15]</a><a class="cite" href="#ref16">[16]</a> 这解释了它的两个特征：一方面继承了吉利的供应链、制造与质量管理体系；另一方面保留了无人机企业的快速迭代文化。</span><span class="en">The AEROFUGIA brand was formed in September 2020 by merging Aerofugia’s drone business with Geely’s Terrafugia team; the legal entity dates to 2016 and became a joint-stock company in March 2026. Geely’s Hubei Terrafugia holds 40.02%; Li Shufu is the ultimate controller; founder Guo Liang serves as CEO and chief scientist.</span></p>
+
+        <p><span class="cn">资本节奏与取证节奏高度耦合。2025 年 11 月完成 C 轮数亿元融资，投资方包括杭实集团、沙特阿美旗下 Prosperity7 与松禾资本；2026 年 2 月完成近 10 亿元 D 轮，由中信建投领投，资金明确用于“AE200 系列最终适航取证冲刺、全球总部基地投产与商业模式构建”。2026 年 4 月，科创板上市辅导备案；胡润《2026 全球独角兽榜》给出 120 亿元估值。<a class="cite" href="#ref15">[15]</a><a class="cite" href="#ref17">[17]</a> 换句话说，<b>它把“取证”本身当作下一轮融资与 IPO 的核心叙事</b>，这也意味着延期会直接转化为资本压力。</span><span class="en">Capital and certification are tightly coupled: a C round in November 2025, a roughly ¥1bn D round in February 2026 explicitly for certification and plant ramp-up, a STAR Market coaching filing in April 2026, and a ¥12bn third-party valuation. Certification is the core of the next financing story — which makes delay a capital problem, not only an engineering one.</span></p>
+
+        <div class="timeline">
+          <div><time>2020.09</time><strong><span class="cn">品牌组建</span><span class="en">Brand formed</span></strong><em><span class="cn">傲势 + 吉利太力飞车合并</span><span class="en">Drone + flying-car merger</span></em></div>
+          <div><time>2021</time><strong><span class="cn">AE200-100 立项</span><span class="en">AE200-100 launched</span></strong><em><span class="cn">确定倾转旋翼路线</span><span class="en">Tilt-rotor route chosen</span></em></div>
+          <div><time>2022.11</time><strong><span class="cn">TC 受理</span><span class="en">TC accepted</span></strong><em><span class="cn">中国首张有人驾驶载人 eVTOL</span><span class="en">China’s first manned eVTOL</span></em></div>
+          <div><time>2024.06</time><strong><span class="cn">全包线过渡</span><span class="en">Full-envelope transition</span></strong><em><span class="cn">全尺寸、全重量、全科目</span><span class="en">Full-scale, full-weight, all科目</span></em></div>
+          <div><time>2025.09</time><strong><span class="cn">首架机下线</span><span class="en">First aircraft rolled out</span></strong><em><span class="cn">进入预生产阶段</span><span class="en">Pre-production</span></em></div>
+          <div><time>2027?</time><strong><span class="cn">TC 目标</span><span class="en">TC target</span></strong><em><span class="cn">媒体口径，存在滑期风险</span><span class="en">Reported; slippage risk</span></em></div>
+        </div>
+        <p class="tbl-note"><span class="cn">图 1　项目路径。时间节点来自企业官网与主流媒体；2027 年为媒体引述的目标，不是已承诺的颁证日期。</span><span class="en">Figure 1. Programme path. Dates from official and press sources; 2027 is a reported target, not a committed issuance date.</span></p>
+
+        <p><span class="cn">制造端的关键节点是成都未来科技城的全球总部基地：2024 年 12 月开工，2026 年 3 月主体完工，计划 2026 年下半年投产。企业口径为“初期年产能数十架，后续逐步提升至数百架”。<a class="cite" href="#ref6">[6]</a> 对一款尚未取证的机型而言，先建产能是一种“以产能锁定客户与地方资源”的策略，但它同时制造了折旧压力：如果 2027 年取证滑到 2028 年，厂房与产线将先于收入存在。</span><span class="en">The Chengdu Future Science City headquarters and plant broke ground in December 2024, topped out in March 2026 and targets production in the second half of 2026, with initial capacity in the tens and later hundreds. Building capacity before certification locks in customers and local support, but also front-loads depreciation if certification slips.</span></p>
+
+        <div class="table-wrap">
+          <table>
+            <caption><span class="cn">表 2　公开可查的主要采购安排（截至 2026-11-24）</span><span class="en">Table 2. Publicly reported purchase arrangements</span></caption>
+            <thead><tr>
+              <th><span class="cn">时间</span><span class="en">Date</span></th>
+              <th><span class="cn">客户</span><span class="en">Customer</span></th>
+              <th class="num"><span class="cn">数量</span><span class="en">Units</span></th>
+              <th><span class="cn">性质</span><span class="en">Nature</span></th>
+            </tr></thead>
+            <tbody>
+              <tr><td>2023-07</td><td><span class="cn">华龙航空</span><span class="en">Sino Jet / Hualong</span></td><td class="num">100</td><td><span class="cn">采购协议（首批）</span><span class="en">Purchase agreement</span></td></tr>
+              <tr><td>2024-11</td><td><span class="cn">工银金租</span><span class="en">ICBC Leasing</span></td><td class="num">120</td><td><span class="cn">意向采购</span><span class="en">Letter of intent</span></td></tr>
+              <tr><td>2025-09</td><td><span class="cn">川发租赁</span><span class="en">Chuanfa Leasing</span></td><td class="num">200</td><td><span class="cn">意向采购（含零部件）</span><span class="en">Intent, incl. spares</span></td></tr>
+              <tr><td>2025-11</td><td><span class="cn">华龙航空</span><span class="en">Hualong</span></td><td class="num">50</td><td><span class="cn">确认性订单</span><span class="en">Firm order</span></td></tr>
+              <tr><td>2026-01</td><td><span class="cn">中航租赁、苏银金租</span><span class="en">AVIC Leasing, Suyin Leasing</span></td><td class="num">300</td><td><span class="cn">采购订单</span><span class="en">Purchase orders</span></td></tr>
+              <tr><td>2026-07</td><td><span class="cn">上海啸翔通航</span><span class="en">Shanghai Xiaoxiang</span></td><td class="num">—</td><td><span class="cn">增购协议</span><span class="en">Additional purchase</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="tbl-note"><span class="cn">数据来源：企业官网、上证报、新华财经、四川在线等，见参考文献 [8][18][19][20]。表内数量为公开披露口径，未披露定金、付款节奏、交付窗口与违约条款；“千余架”不等于表内加总。</span><span class="en">Sources: company site, Shanghai Securities News, Xinhua Finance, Sichuan Online. Deposits, payment schedules, delivery windows and penalties are undisclosed; the “thousand-plus” figure is not the sum of this table.</span></p>
+
+        <p><span class="cn">按公开信息加总，可核对的订单约 720 架：华龙 100 架（其中 50 架后确认为正式订单）、工银金租 120 架（意向）、川发租赁 200 架（意向）、中航租赁与苏银金租 300 架（战略协议中的采购订单，未披露拆分与定金）。真正具备较强约束力的只有华龙 50 架——这就是“千余架”与“可确认收入”之间的差距。<a class="cite" href="#ref8">[8]</a><a class="cite" href="#ref19">[19]</a><a class="cite" href="#ref20">[20]</a></span><span class="en">Summing public disclosures gives about 720 units: Hualong 100 (of which 50 later firmed), ICBC Leasing 120 (intent), Chuanfa 200 (intent), AVIC and Suyin Leasing 300 (purchase orders inside strategic agreements, split and deposits undisclosed). Only Hualong’s 50 are strongly binding — the gap between “a thousand-plus” and recognisable revenue.</span></p>
+
+        <div class="callout">
+          <b><span class="cn">一个容易被忽略的资质细节</span><span class="en">An overlooked qualification detail</span></b>
+          <p><span class="cn">2025 年 5 月获得的 CCAR-135 部运行合格证，由沃飞旗下通航运营主体持有，初期以直升机执飞短途空中游览与不定期载客，<b>并不等于 AE200 已获准商业载客</b>。它的真实价值是：提前跑通航线申请、旅客服务、维修与安全管理体系，等 eVTOL 取证后可以更快切换机型。<a class="cite" href="#ref5">[5]</a></span><span class="en">The CCAR-135 certificate obtained in May 2025 sits with Volant’s general-aviation operating entity and initially covers helicopter sightseeing and non-scheduled passenger flights — not AE200 passenger operations. Its value is to pre-build route approvals, passenger handling, maintenance and safety management before the eVTOL is certificated.</span></p>
+        </div>
+      </section>
+
+      <section class="sec" id="product">
+        <div class="sec-head">
+          <div class="sec-num">03</div>
+          <div><h2><span class="cn">型号与产品定义</span><span class="en">Product definition</span><span class="sub">An aircraft, not a roadable flying car</span></h2></div>
+        </div>
+
+        <p class="lede"><span class="cn">中文舆论习惯把 AE200 叫“飞行汽车”，但它的产品定义是轻型商用 eVTOL：不能上路行驶，也不需要跑道。这个差别决定了它的监管路径、成本结构与场景边界。</span><span class="en">Chinese coverage calls AE200 a “flying car”, but it is a light commercial eVTOL: not roadable, and runway-independent. That difference determines its regulation, cost structure and addressable scenarios.</span></p>
+
+        <p><span class="cn">AE200 是一个系列型号，官方定义是“3—6 座级纯电动有人驾驶载人 eVTOL”，全系列设计参数为 200 km 航程、230 km/h 巡航速度，机身长 9.9 m、翼展 15 m、机高 4.4 m。AE200-100 是首个取证型别，标准客舱为 1 名驾驶员 + 4 名乘客，主要用于 A 点到 B 点的低空观光与低空出行；后续规划型别覆盖文旅与医疗救援。<a class="cite" href="#ref1">[1]</a> 2026 年 7 月，沃飞发布面向文旅的 6 座优化样机，显示首批应用场景正进一步向“低空文旅”收敛。<a class="cite" href="#ref39">[39]</a> 需要提醒的是，2024 年公开报道的参数为最大起飞重量 2,500 kg、任务巡航 248 km/h、最大平飞 320 km/h、升限 1,000 m AGL / 3,000 m MSL，这些数字与官网的“230 km/h 巡航”并不冲突——前者是任务剖面，后者是系列设计值——但混用时会造成误读。<a class="cite" href="#ref21">[21]</a></span><span class="en">AE200 is a series defined as a 3–6 seat, all-electric, piloted eVTOL with 200 km range and 230 km/h cruise, measuring 9.9 m long, 15 m span and 4.4 m high. AE200-100 is the first certification variant, typically one pilot and four passengers, aimed at sightseeing and point-to-point travel. Reported 2024 figures — 2,500 kg MTOW, 248 km/h mission cruise, 320 km/h maximum, 1,000 m AGL ceiling — describe a mission profile rather than contradicting the series design value.</span></p>
+
+        <figure class="figure">
+          <img src="assets/ae200-flight.jpg" alt="AE200 在山地背景下巡航飞行" width="1400" height="787" loading="lazy">
+          <figcaption><b><span class="cn">图 2</span><span class="en">Figure 2</span></b>　<span class="cn">AE200 技术验证机在山区上空巡航。倾转构型在巡航段以固定翼模式飞行，是它相对多旋翼机型拉开航程与速度的关键。图片：沃飞长空官方素材。</span><span class="en">AE200 technology demonstrator in cruise. Fixed-wing cruise is what separates tilt-rotor range and speed from multirotor designs. Image: Volant official assets.</span></figcaption>
+        </figure>
+
+        <div class="table-wrap">
+          <table>
+            <caption><span class="cn">表 3　AE200-100 公开参数与证据级别</span><span class="en">Table 3. AE200-100 public parameters and evidence level</span></caption>
+            <thead><tr>
+              <th><span class="cn">项目</span><span class="en">Item</span></th>
+              <th><span class="cn">公开值</span><span class="en">Reported value</span></th>
+              <th><span class="cn">证据级别</span><span class="en">Evidence</span></th>
+              <th><span class="cn">备注</span><span class="en">Note</span></th>
+            </tr></thead>
+            <tbody>
+              <tr><td><span class="cn">最大起飞重量</span><span class="en">MTOW</span></td><td>2,500 kg</td><td><span class="chip"><span class="cn">媒体</span><span class="en">Press</span></span></td><td><span class="cn">2024 年试飞通稿口径</span><span class="en">2024 flight-release figure</span></td></tr>
+              <tr><td><span class="cn">最大商载</span><span class="en">Payload</span></td><td>500 kg</td><td><span class="chip est"><span class="cn">行业</span><span class="en">Industry</span></span></td><td><span class="cn">未见企业正式确认</span><span class="en">Not officially confirmed</span></td></tr>
+              <tr><td><span class="cn">航程</span><span class="en">Range</span></td><td>200 km</td><td><span class="chip off"><span class="cn">官方</span><span class="en">Official</span></span></td><td><span class="cn">设计值，非满载实测</span><span class="en">Design value, not full-load tested</span></td></tr>
+              <tr><td><span class="cn">巡航速度</span><span class="en">Cruise</span></td><td>230 km/h（任务 248）</td><td><span class="chip off"><span class="cn">官方</span><span class="en">Official</span></span></td><td><span class="cn">系列值 / 任务剖面</span><span class="en">Series / mission</span></td></tr>
+              <tr><td><span class="cn">最大平飞速度</span><span class="en">V<sub>max</sub></span></td><td>320 km/h</td><td><span class="chip"><span class="cn">媒体</span><span class="en">Press</span></span></td><td><span class="cn">2024 年通稿</span><span class="en">2024 release</span></td></tr>
+              <tr><td><span class="cn">升限</span><span class="en">Ceiling</span></td><td>1,000 m AGL / 3,000 m MSL</td><td><span class="chip"><span class="cn">媒体</span><span class="en">Press</span></span></td><td><span class="cn">城市低空运行足够</span><span class="en">Sufficient for urban low-altitude ops</span></td></tr>
+              <tr><td><span class="cn">座位</span><span class="en">Seats</span></td><td><span class="cn">3—6 座（标准 1+4）</span><span class="en">3–6 (standard 1+4)</span></td><td><span class="chip off"><span class="cn">官方</span><span class="en">Official</span></span></td><td><span class="cn">系列与型别口径不同</span><span class="en">Series vs variant</span></td></tr>
+              <tr><td><span class="cn">动力架构</span><span class="en">Propulsion</span></td><td><span class="cn">8 轴、内 4 倾转、8 套双余度电驱</span><span class="en">8 axes, 4 inboard tilt, 8 dual-redundant drives</span></td><td><span class="chip off"><span class="cn">官方</span><span class="en">Official</span></span></td><td><span class="cn">单机功率未公开</span><span class="en">Unit power undisclosed</span></td></tr>
+              <tr><td><span class="cn">电池</span><span class="en">Battery</span></td><td><span class="cn">4 组独立包、半固态电芯</span><span class="en">4 independent packs, semi-solid cells</span></td><td><span class="chip off"><span class="cn">官方</span><span class="en">Official</span></span></td><td><span class="cn">总容量 kWh 未公开</span><span class="en">Total kWh undisclosed</span></td></tr>
+              <tr><td><span class="cn">充电</span><span class="en">Recharge</span></td><td><span class="cn">约 20 分钟（800—1000 V 直流）</span><span class="en">~20 min at 800–1000 V DC</span></td><td><span class="chip"><span class="cn">媒体</span><span class="en">Press</span></span></td><td><span class="cn">依赖专用储能充电站</span><span class="en">Requires dedicated charger</span></td></tr>
+              <tr><td><span class="cn">噪声</span><span class="en">Noise</span></td><td><span class="cn">地面 45 dB(A)@300 m；舱内 ≤60 dB(A)</span><span class="en">45 dB(A) at 300 m; ≤60 dB(A) cabin</span></td><td><span class="chip est"><span class="cn">企业测试</span><span class="en">Company test</span></span></td><td><span class="cn">非 CAAC 噪声审定结论</span><span class="en">Not a CAAC noise finding</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="tbl-note"><span class="cn">“官方”指企业官网或官方发布会；“媒体”指主流媒体引述企业通稿；“行业”指第三方整理，未见企业确认；“企业测试”指企业自测口径。所有参数以 CAAC 最终批准的型号数据表为准。</span><span class="en">“Official” = company site or launch event; “Press” = company release quoted by media; “Industry” = third-party compilation; “Company test” = self-reported. The CAAC-approved type data sheet prevails.</span></p>
+
+        <h3><span class="cn">为什么不做“能开的飞行汽车”</span><span class="en">Why not a roadable flying car</span></h3>
+        <p><span class="cn">陆空两栖产品要同时满足道路碰撞法规与航空适航要求，重量、结构与认证成本会急剧上升；而 AE200 选择的是“纯航空器 + 垂直起降场”的路线，把地面段交给汽车与轨道交通。这个选择牺牲了“门到门”的叙事，却换来了更清晰的适航边界：它只需要回答航空器的问题。对运营商而言，这意味着起降点必须固定、地面接驳必须另行解决——这正是后文场景分析的核心约束。</span><span class="en">A roadable vehicle must satisfy both crash regulations and airworthiness, driving up mass, structure and certification cost. AE200 chooses a pure aircraft plus vertiports, leaving the ground leg to cars and rail. That sacrifices door-to-door storytelling but clarifies the certification boundary — at the price of fixed vertiports and a separate ground connection.</span></p>
+      </section>
+
+
+      <section class="sec" id="technology">
+        <div class="sec-head">
+          <div class="sec-num">04</div>
+          <div><h2><span class="cn">系统架构与关键技术</span><span class="en">System architecture and key technologies</span><span class="sub">Redundancy is the product</span></h2></div>
+        </div>
+
+        <p class="lede"><span class="cn">AE200 的技术叙事不是“飞得快”，而是“坏得起”：八个轴、八套电驱、四个电池包、三套飞控通道，共同把“单点失效”转化为“可继续飞行并着陆”。这套冗余哲学决定了它的重量、成本与维护方式。</span><span class="en">AE200’s story is not speed but survivability: eight axes, eight drives, four packs and redundant flight-control channels turn single failures into continued flight and landing. That philosophy dictates mass, cost and maintenance.</span></p>
+
+        <div class="arch" aria-label="AE200 系统架构分层">
+          <div class="arch-row">
+            <div class="arch-label"><span class="cn">飞行器平台</span><span class="en">Airframe</span></div>
+            <div class="arch-nodes" style="--n:4">
+              <div class="node"><b><span class="cn">复合材料机体</span><span class="en">Composite body</span></b><span><span class="cn">碳纤维占比 &gt;80%</span><span class="en">&gt;80% CFRP</span></span></div>
+              <div class="node"><b><span class="cn">上单翼 / 短舱</span><span class="en">High wing / nacelles</span></b><span><span class="cn">翼展 15 m</span><span class="en">15 m span</span></span></div>
+              <div class="node"><b><span class="cn">可收放起落架</span><span class="en">Retractable gear</span></b><span><span class="cn">前三点式</span><span class="en">Tricycle</span></span></div>
+              <div class="node"><b><span class="cn">坠撞与漂浮</span><span class="en">Crash &amp; flotation</span></b><span><span class="cn">20G 模组 / 水上迫降</span><span class="en">20G modules / ditching</span></span></div>
+            </div>
+          </div>
+          <div class="arch-row">
+            <div class="arch-label"><span class="cn">能源</span><span class="en">Energy</span></div>
+            <div class="arch-nodes" style="--n:3">
+              <div class="node"><b><span class="cn">4 × 独立电池包</span><span class="en">4 × independent packs</span></b><span><span class="cn">半固态电芯</span><span class="en">Semi-solid cells</span></span></div>
+              <div class="node"><b><span class="cn">BMS + 热失控管理</span><span class="en">BMS + thermal containment</span></b><span><span class="cn">独立泄压通道</span><span class="en">Dedicated vent path</span></span></div>
+              <div class="node"><b><span class="cn">地面储能充电</span><span class="en">Ground storage charging</span></b><span><span class="cn">264 kWh / 20 min</span><span class="en">264 kWh / 20 min</span></span></div>
+            </div>
+          </div>
+          <div class="arch-row">
+            <div class="arch-label"><span class="cn">推进</span><span class="en">Propulsion</span></div>
+            <div class="arch-nodes" style="--n:3">
+              <div class="node"><b><span class="cn">8 套双余度电驱</span><span class="en">8 dual-redundant drives</span></b><span><span class="cn">“峨眉山”</span><span class="en">Emeishan</span></span></div>
+              <div class="node"><b><span class="cn">内 4 轴倾转机构</span><span class="en">4 inboard tilt axes</span></b><span><span class="cn">90°↔0° 过渡</span><span class="en">90°↔0° transition</span></span></div>
+              <div class="node"><b><span class="cn">外 4 轴固定升力</span><span class="en">4 outboard lift axes</span></b><span><span class="cn">巡航顺桨</span><span class="en">Feathered in cruise</span></span></div>
+            </div>
+          </div>
+          <div class="arch-row">
+            <div class="arch-label"><span class="cn">控制与航电</span><span class="en">Control</span></div>
+            <div class="arch-nodes" style="--n:3">
+              <div class="node"><b><span class="cn">异构多余度飞控</span><span class="en">Dissimilar redundancy</span></b><span><span class="cn">交叉校验</span><span class="en">Cross-checking</span></span></div>
+              <div class="node"><b><span class="cn">SVO1 辅助驾驶</span><span class="en">SVO1 assistance</span></b><span><span class="cn">统一操纵逻辑</span><span class="en">Unified control laws</span></span></div>
+              <div class="node"><b><span class="cn">综合航电平台</span><span class="en">Integrated avionics</span></b><span><span class="cn">10⁻⁸/FH</span><span class="en">10⁻⁸/FH</span></span></div>
+            </div>
+          </div>
+          <div class="arch-row">
+            <div class="arch-label"><span class="cn">运行</span><span class="en">Operations</span></div>
+            <div class="arch-nodes" style="--n:4">
+              <div class="node"><b><span class="cn">垂直起降场</span><span class="en">Vertiport</span></b><span><span class="cn">TLOF / FATO</span><span class="en">TLOF / FATO</span></span></div>
+              <div class="node"><b><span class="cn">维修与航材</span><span class="en">MRO</span></b><span><span class="cn">未公开</span><span class="en">Undisclosed</span></span></div>
+              <div class="node"><b><span class="cn">航线与空域</span><span class="en">Routes / airspace</span></b><span><span class="cn">UOM / 低空智联网</span><span class="en">UOM / low-altitude net</span></span></div>
+              <div class="node"><b><span class="cn">人员资质</span><span class="en">Crew licensing</span></b><span><span class="cn">SVO 训练体系</span><span class="en">SVO training</span></span></div>
+            </div>
+          </div>
+        </div>
+        <p class="tbl-note"><span class="cn">图 3　按公开信息重构的系统架构。虚线框之外的运行层与机载硬件同等重要；未公开的控制拓扑、供应商与安全机制不在图中臆测。</span><span class="en">Figure 3. Architecture reconstructed from public information. The operational layer matters as much as airborne hardware; undisclosed topology and suppliers are not invented.</span></p>
+
+        <h3><span class="cn">4.1 “八轴内四倾转”：把过渡风险拆成两半</span><span class="en">4.1 Eight axes, four tilting: splitting transition risk</span></h3>
+
+        <p><span class="cn">倾转旋翼的核心难题是过渡段：旋翼从垂直升力模式转向水平推力模式时，机翼尚未建立足够升力，飞控必须在很小的速度—姿态窗口内完成配平与功率分配。全倾转方案（如 Joby S4）把所有旋翼都置于倾转短舱，巡航效率最高，但过渡段一旦出错，可用升力会同时减少。AE200 的做法是<b>只让内侧四个轴倾转，外侧四个轴保持固定升力</b>；巡航时外侧旋翼顺桨减阻。<a class="cite" href="#ref2">[2]</a></span><span class="en">The hard part of a tilt-rotor is transition: as rotors rotate from lift to thrust, the wing has not yet built enough lift, so control must rebalance within a narrow speed–attitude window. Full-tilt designs maximise cruise efficiency but lose lift together if transition goes wrong. AE200 tilts only the four inboard axes and keeps four outboard lift axes fixed, feathering them in cruise.</span></p>
+
+        <figure class="figure">
+          <svg viewBox="0 0 900 450" role="img" aria-label="AE200 八轴内四倾转构型示意">
+  <rect width="900" height="450" fill="#fff"/>
+  <g stroke="#ececef" stroke-width="1">
+    <path d="M0 70h900M0 140h900M0 210h900M0 280h900M0 350h900M0 420h900"/>
+  </g>
+  <text x="28" y="28" font-family="-apple-system,PingFang SC,sans-serif" font-size="11" font-weight="700" fill="#102d3c" letter-spacing=".08em">TOP VIEW · 八轴内四倾转（示意图，非工程图）</text>
+
+  <!-- wing -->
+  <path d="M110 200 L790 200 L790 238 L110 238 Z" fill="#eef4f6" stroke="#173b4d" stroke-width="1.2"/>
+  <!-- fuselage -->
+  <path d="M290 185 H590 Q617 185 617 214 Q617 243 590 243 H290 Q263 243 263 214 Q263 185 290 185 Z" fill="#fff" stroke="#173b4d" stroke-width="1.4"/>
+  <path d="M290 185 L236 214 L290 243" fill="#fff" stroke="#173b4d" stroke-width="1.4"/>
+  <!-- tail -->
+  <path d="M617 205 H720 V223 H617" fill="#fff" stroke="#173b4d" stroke-width="1.2"/>
+  <path d="M700 205 V164 H722 V205" fill="#eef4f6" stroke="#173b4d" stroke-width="1.2"/>
+  <path d="M720 205 H760 V223 H720" fill="#eef4f6" stroke="#173b4d" stroke-width="1.2"/>
+
+  <!-- masts -->
+  <g stroke="#a9b8be" stroke-width="1" stroke-dasharray="2 2">
+    <path d="M170 150V200M240 150V200M330 140V200M400 140V200M500 140V200M570 140V200M660 150V200M730 150V200"/>
+  </g>
+
+  <!-- outer fixed lift rotors -->
+  <g fill="#fff" stroke="#5c7783" stroke-width="1.3">
+    <circle cx="170" cy="150" r="26" stroke-dasharray="3 3"/>
+    <circle cx="240" cy="150" r="26" stroke-dasharray="3 3"/>
+    <circle cx="660" cy="150" r="26" stroke-dasharray="3 3"/>
+    <circle cx="730" cy="150" r="26" stroke-dasharray="3 3"/>
+  </g>
+  <!-- inner tilt rotors -->
+  <g fill="#e8eff2" stroke="#173b4d" stroke-width="1.4">
+    <circle cx="330" cy="140" r="30"/>
+    <circle cx="400" cy="140" r="30"/>
+    <circle cx="500" cy="140" r="30"/>
+    <circle cx="570" cy="140" r="30"/>
+  </g>
+
+  <!-- rotor letters -->
+  <g font-family="-apple-system,PingFang SC,sans-serif" font-size="11" font-weight="700" fill="#496672" text-anchor="middle">
+    <text x="170" y="154">L</text>
+    <text x="240" y="154">L</text>
+    <text x="660" y="154">L</text>
+    <text x="730" y="154">L</text>
+  </g>
+  <g font-family="-apple-system,PingFang SC,sans-serif" font-size="12" font-weight="700" fill="#102d3c" text-anchor="middle">
+    <text x="330" y="145">T</text>
+    <text x="400" y="145">T</text>
+    <text x="500" y="145">T</text>
+    <text x="570" y="145">T</text>
+  </g>
+
+  <!-- labels -->
+  <g font-family="-apple-system,PingFang SC,sans-serif" text-anchor="middle">
+    <text x="205" y="72" font-size="11.5" font-weight="700" fill="#173b4d">外侧 4 轴 · 固定升力</text>
+    <text x="205" y="88" font-size="10" fill="#6e6e73">巡航顺桨 / 故障冗余</text>
+    <path d="M160 96H250" stroke="#b7c3c8" stroke-width="1"/>
+    <text x="450" y="64" font-size="11.5" font-weight="700" fill="#173b4d">内侧 4 轴 · 90°↔0° 倾转</text>
+    <text x="450" y="80" font-size="10" fill="#6e6e73">垂直升力 ↔ 巡航推力</text>
+    <path d="M320 88H580" stroke="#b7c3c8" stroke-width="1"/>
+    <text x="450" y="270" font-size="10.5" fill="#6e6e73">机身 9.9 m　·　机高 4.4 m</text>
+  </g>
+
+  <!-- span dimension -->
+  <g stroke="#8a9499" stroke-width="1">
+    <path d="M110 300H790"/>
+    <path d="M110 294V306M790 294V306"/>
+  </g>
+  <text x="450" y="292" font-family="-apple-system,PingFang SC,sans-serif" font-size="10.5" fill="#496672" text-anchor="middle">翼展 15 m</text>
+
+  <!-- legend -->
+  <text x="450" y="344" font-family="-apple-system,PingFang SC,sans-serif" font-size="10" fill="#6e6e73" text-anchor="middle">T = 倾转轴（4）　　L = 固定升力轴（4）　　旋翼分三层、侧倾安装</text>
+  <text x="450" y="364" font-family="-apple-system,PingFang SC,sans-serif" font-size="10" fill="#8a9499" text-anchor="middle">示意图不表示真实几何比例；未公开的桨盘直径、短舱尺寸与舵面布局未在此臆测</text>
+
+  <!-- transition sequence -->
+  <text x="450" y="404" font-family="-apple-system,PingFang SC,sans-serif" font-size="10.5" fill="#102d3c" text-anchor="middle">过渡时序：垂直起飞（90°）→ 加速爬升（45°）→ 固定翼巡航（0°）→ 减速下降 → 垂直着陆</text>
+</svg>
+          <figcaption><b><span class="cn">图 4</span><span class="en">Figure 4</span></b>　<span class="cn">构型示意：内四轴倾转、外四轴固定升力，旋翼分三层、侧倾安装以降低地面人员与设备被撞击的风险。示意图不代表真实几何比例。</span><span class="en">Configuration schematic: four inboard tilt axes plus four outboard lift axes, with three-layer, canted rotor placement to reduce ground-contact risk. Not to scale.</span></figcaption>
+        </figure>
+
+        <p><span class="cn">这个折中有两笔账。收益端：外层四个升力轴在过渡段提供独立于倾转机构的升力，即使倾转机构卡阻或内侧动力失效，仍保留可控下降能力；同时，固定升力轴的桨盘可以布置得更高、更靠外，降低地面人员与设备被桨叶击中的概率。代价端：巡航时四个不产生升力的旋翼与短舱成为“死重”和阻力源，航程与速度的上限低于全倾转方案；此外，八个轴意味着八套电驱、八套冷却与更多线束，维护复杂度上升。</span><span class="en">The trade has two sides. On the benefit side, the four outboard lift axes provide lift independent of the tilt mechanism, preserving a controlled descent if a tilt actuator jams or inboard power fails; their higher, wider placement also reduces ground-contact risk. On the cost side, four non-lifting rotors and nacelles become dead weight and drag in cruise, capping range and speed below full-tilt designs, while eight axes multiply drives, cooling and harness complexity.</span></p>
+
+        <p><span class="cn">从公开影像看，AE200 采用上单翼、四短舱、可收放前三点起落架；旋翼分三层排布并侧倾安装。这种布局对地面安全友好，但对结构重量与气动干扰不利——短舱与机翼之间的干扰、倾转过程中的非定常下洗，都需要风洞与带动力试验来标定。企业公开的信息是“完成全机带动力风洞试验与全尺寸螺旋桨跑车风洞试验”，但没有公开干扰阻力增量、桨盘载荷与功率载荷等关键参数。<a class="cite" href="#ref2">[2]</a></span><span class="en">Public imagery shows a high wing, four nacelles and retractable tricycle gear, with three-layer canted rotors. That is friendly to ground safety but demanding structurally and aerodynamically: nacelle–wing interference and unsteady downwash during tilt require powered wind-tunnel work. The company reports powered full-aircraft and full-scale propeller tunnel tests but discloses no interference drag, disk loading or power loading.</span></p>
+
+        <h3><span class="cn">4.2 动力与倾转机构</span><span class="en">4.2 Propulsion and tilt mechanism</span></h3>
+
+        <p><span class="cn">AE200 采用八套“双余度”分布式电驱：每套包含冗余绕组、冗余控制器与冗余散热，官方表述为单台失效、甚至对角两台同时失效仍可安全着陆。2026 年 3 月发布的“峨眉山”航空电动发动机由沃飞与卧龙电驱合资的浙江龙飞电驱研制，主打高功率密度、倾转工况适配与多通道余度；媒体披露单套峰值功率超过 200 kW、扭矩超过 1,300 N·m，但该数字未出现在企业正式规格表中。<a class="cite" href="#ref9">[9]</a><a class="cite" href="#ref22">[22]</a></span><span class="en">AE200 uses eight dual-redundant distributed drives with redundant windings, controllers and cooling; the company says it can land safely after one unit, or even two diagonal units, fail. The “Emeishan” engine, launched in March 2026 by the Longfei Drive joint venture with Wolong, targets high power density, tilt-duty suitability and multi-channel redundancy. Media cite over 200 kW peak and 1,300 N·m per unit, though this is absent from formal specifications.</span></p>
+
+        <p><span class="cn">倾转机构是这类构型最容易被低估的部件。它要在全寿命内完成数千次 90° 往返，承受旋翼推力、陀螺力矩、阵风载荷与热循环，还要在卡阻时被飞控识别并隔离。企业公开了“倾转机构专项振动试验”和铁鸟台上的功率级联试，但没有公开作动器型式（电动/液压）、余度数、卡阻检测逻辑与寿命指标。对于适航审定而言，这些恰好是专用条件中最难编写的部分。<a class="cite" href="#ref23">[23]</a></span><span class="en">The tilt mechanism is the most under-appreciated part: thousands of 90° cycles under thrust, gyroscopic moment, gust and thermal loads, plus jam detection and isolation. Vibration testing and iron-bird power-level integration are reported, but actuator type, redundancy, jam-detection logic and life limits are not. These are precisely the hardest clauses in a special condition.</span></p>
+
+        <h3><span class="cn">4.3 电池：四个包，四本安全账</span><span class="en">4.3 Battery: four packs, four safety ledgers</span></h3>
+
+        <p><span class="cn">AE200 的动力电池“大渡河”采用半固态/固液混合电芯，电芯能量密度约 320 Wh/kg，支持 2C 充电、5C 放电、超过 1,000 次循环，20 分钟可完成一次完整补能；电池包采用 CTP 结构，成组率超过 80%，并配备对流脉冲热管理，兼顾 4C 充电散热与低温快速启动。<a class="cite" href="#ref10">[10]</a><a class="cite" href="#ref11">[11]</a> 电芯供应商为赣锋锂业，2025 年 12 月完成装机后的首阶段载人试飞。<a class="cite" href="#ref10">[10]</a></span><span class="en">The “Daduhe” pack uses semi-solid cells at about 320 Wh/kg, 2C charge, 5C discharge, over 1,000 cycles and a 20-minute full recharge. CTP packaging exceeds 80% integration; convection-pulse thermal management serves both 4C charging and cold starts. Ganfeng supplies the cells, installed before the first manned verification flights in December 2025.</span></p>
+
+        <p><span class="cn">真正值得研究的是它的失效设计：电池系统按 DAL-B 研制保证等级设计，电芯层级失效率标称 10⁻⁸—10⁻⁹；模组需在 20G 坠撞冲击下不发生重大结构损坏；多电芯热失控时，系统要在数十小时内把气体、碎片与液体限制在泄压通道内。四个电池包相互独立，每个包为多台电驱供电，单包失效后其余包仍能支撑安全飞行与着陆。<a class="cite" href="#ref11">[11]</a><a class="cite" href="#ref12">[12]</a></span><span class="en">The failure design matters more: DAL-B assurance, cell failure rates quoted at 10⁻⁸–10⁻⁹, modules surviving 20G crash loads, and multi-cell thermal runaway contained within vent paths for tens of hours. Four independent packs each feed multiple drives, so one pack’s loss still supports safe flight and landing.</span></p>
+
+        <div class="callout">
+          <b><span class="cn">被忽略的能量账</span><span class="en">The missing energy ledger</span></b>
+          <p><span class="cn">企业从未公开机载电池总容量（kWh）。网上流传的“264 kWh”是地面移动储能充电站，不是机上电池。没有总容量，就无法独立核算 200 km 航程在满载、逆风、备降与 20 分钟余油下的真实性——这正是本文第 5 节只能用“数量级估算”的原因。</span><span class="en">The company has never disclosed installed battery energy. The widely cited “264 kWh” refers to a ground charging station, not the aircraft. Without total kWh, the 200 km claim cannot be independently checked against full payload, headwind, diversion and 20-minute reserves — hence the order-of-magnitude approach in Section 5.</span></p>
+        </div>
+
+        <h3><span class="cn">4.4 飞控、航电与 SVO1</span><span class="en">4.4 Flight control, avionics and SVO1</span></h3>
+
+        <p><span class="cn">飞控采用非相似（异构）多余度架构：多套不同实现的计算机同步运行、交叉校验，避免共因失效。AE200 的设计目标是 SVO1（简化飞行器操纵）级辅助驾驶——把垂直起降与巡航两套操纵逻辑统一起来，降低飞行员培训负担，并在异常时提供红/琥珀/白三级告警与辅助决策。企业称 SVO 可使运营本质安全性提升 1—2 个数量级。<a class="cite" href="#ref24">[24]</a> 航电平台则宣称比传统综合航电减重 95%，可同时运行 20 余个驻留应用且互不干扰，可用性与完整性达到 10⁻⁸/FH。<a class="cite" href="#ref14">[14]</a></span><span class="en">Flight control uses dissimilar redundancy: multiple implementations run in parallel and cross-check to avoid common-mode failure. The design targets SVO1 simplification, unifying vertical and cruise control laws, reducing pilot workload and providing red/amber/white alerts and decision support. The avionics platform is claimed to be 95% lighter than conventional integrated avionics, hosting 20+ partitioned applications with 10⁻⁸/FH availability and integrity.</span></p>
+
+        <p><span class="cn">SVO1 是一个被营销语言包裹的技术选择。对运营商，它意味着更短的改装培训与更低的机组成本；对适航，它意味着必须证明“简化”没有把风险转移给飞行员——例如模式混淆、自动化依赖、异常下的接管时间。这些属于 SOTIF 与人为因素范畴，公开材料目前只到“功能描述”层级，没有场景清单与验证证据。</span><span class="en">SVO1 is a technical choice wrapped in marketing. For operators it means shorter conversion training and lower crew cost; for certification it means proving simplification does not shift risk to the pilot through mode confusion, automation dependence or takeover latency. That is SOTIF and human factors territory, and public material stops at functional description.</span></p>
+
+        <h3><span class="cn">4.5 结构、材料与坠撞</span><span class="en">4.5 Structure, materials and crashworthiness</span></h3>
+
+        <p><span class="cn">机体结构大量使用碳纤维增强复合材料，企业称占结构重量 80% 以上，采用“积木式”验证（试样—元件—部件—全机）。此外公开了两项与生存性直接相关的设计：基于全剖面的乘员坠撞保护，以及水上应急迫降与漂浮能力。对一款主要在城市与景区上空运行、且没有整机降落伞公开证据的机型而言，坠撞与水上迫降是最后一道被动安全屏障。<a class="cite" href="#ref14">[14]</a><a class="cite" href="#ref25">[25]</a></span><span class="en">The airframe is largely carbon-fibre composite — over 80% of structural weight by the company’s account — validated through a building-block approach. Two survivability features are public: full-section occupant crash protection and emergency water ditching with flotation. For an aircraft operating over cities and scenic areas, with no public evidence of a whole-aircraft parachute, these are the last passive barriers.</span></p>
+
+        <p><span class="cn">复合材料的优势是比强度与可设计性，风险是缺陷与冲击损伤的不可见性。航空级复合材料结构需要超声、X 射线等无损检测与严格的工艺窗口；而 eVTOL 的高频起降、倾转载荷与电池热循环，会叠加出与传统通航飞机不同的疲劳谱。这部分公开信息几乎为零。</span><span class="en">Composites offer specific strength and design freedom, but hidden defects and impact damage are the risk. Aerospace composite structures demand ultrasonic and X-ray inspection plus tight process windows; eVTOL’s high-cycle take-offs, tilt loads and battery thermal cycling create a fatigue spectrum unlike conventional general aviation. Public data here is essentially nil.</span></p>
+
+        <h3><span class="cn">4.6 技术成熟度（TRL）判断</span><span class="en">4.6 Technology readiness assessment</span></h3>
+
+        <div class="trl" aria-label="技术成熟度">
+          <div class="trl-row"><span><span class="cn">动力与电驱</span><span class="en">Propulsion</span></span><div class="trl-bar"><i style="width:78%"></i></div><b>TRL 7</b></div>
+          <div class="trl-row"><span><span class="cn">动力电池</span><span class="en">Battery</span></span><div class="trl-bar"><i style="width:78%"></i></div><b>TRL 7</b></div>
+          <div class="trl-row"><span><span class="cn">倾转机构</span><span class="en">Tilt mechanism</span></span><div class="trl-bar"><i style="width:67%"></i></div><b>TRL 6</b></div>
+          <div class="trl-row"><span><span class="cn">飞控与航电</span><span class="en">Flight control</span></span><div class="trl-bar"><i style="width:78%"></i></div><b>TRL 7</b></div>
+          <div class="trl-row"><span><span class="cn">整机适航</span><span class="en">Certification</span></span><div class="trl-bar"><i style="width:67%"></i></div><b>TRL 6</b></div>
+          <div class="trl-row"><span><span class="cn">运行与保障体系</span><span class="en">Operations</span></span><div class="trl-bar"><i style="width:44%"></i></div><b>TRL 4</b></div>
+        </div>
+        <p class="tbl-note"><span class="cn">TRL 为本研究基于公开证据的判断，不是企业评级。判定依据：TRL 7 = 全尺寸系统在运行环境中演示；TRL 6 = 原型在相关环境中验证；TRL 4 = 实验室环境验证。运行体系因起降场、MRO、航线审批均未成形而偏低。</span><span class="en">TRL is this study’s judgement, not a company rating: 7 = full-scale system demonstrated in an operational environment; 6 = prototype validated in a relevant environment; 4 = lab validation. Operations scores low because vertiports, MRO and route approvals are not yet in place.</span></p>
+      </section>
+
+
+      <section class="sec" id="feasibility">
+        <div class="sec-head">
+          <div class="sec-num">05</div>
+          <div><h2><span class="cn">技术可行性：从“能过渡”到“能运输”</span><span class="en">Technical feasibility: from transition to transport</span><span class="sub">An energy ledger, not a flight demo</span></h2></div>
+        </div>
+
+        <p class="lede"><span class="cn">2024 年 6 月的全包线过渡证明了一件事：这架飞机在试飞条件下可以完成从垂直起飞到固定翼巡航再回到垂直着陆的完整循环。它没有证明的是：在满载、逆风、备降、极端温度与单点故障叠加时，能量与功率是否仍然够用。</span><span class="en">The June 2024 full-envelope transition proved the aircraft can complete the full cycle under test conditions. It did not prove energy and power margins under full payload, headwind, diversion, temperature extremes and single failures combined.</span></p>
+
+        <h3><span class="cn">5.1 能量与功率：一笔只能用假设补全的账</span><span class="en">5.1 Energy and power: a ledger filled with assumptions</span></h3>
+
+        <p><span class="cn">企业没有公开旋翼直径、桨盘面积、电池总容量与巡航升阻比，因此无法做“官方规格复核”。但可以用公开的 2,500 kg 起飞重量、200 km 航程与 230 km/h 巡航，建立数量级模型。下表所有输入均为假设，输出只用于判断“是否物理上说得通”，不构成产品性能结论。</span><span class="en">Rotor diameter, disk area, installed energy and cruise L/D are undisclosed, so official specifications cannot be re-derived. But the public 2,500 kg MTOW, 200 km range and 230 km/h cruise support an order-of-magnitude model. Every input below is an assumption; outputs test physical plausibility only.</span></p>
+
+        <div class="table-wrap">
+          <table>
+            <caption><span class="cn">表 4　能量与功率数量级估算（本文模型，非官方数据）</span><span class="en">Table 4. Order-of-magnitude energy and power estimate (this study, not official)</span></caption>
+            <thead><tr>
+              <th><span class="cn">量</span><span class="en">Quantity</span></th>
+              <th><span class="cn">假设 / 公式</span><span class="en">Assumption / formula</span></th>
+              <th class="num"><span class="cn">结果</span><span class="en">Result</span></th>
+            </tr></thead>
+            <tbody>
+              <tr><td><span class="cn">悬停功率</span><span class="en">Hover power</span></td><td><span class="cn">P = (mg)<sup>3/2</sup> / √(2ρA) / FM；A≈45 m²，FM≈0.72</span><span class="en">Momentum theory; A≈45 m², FM≈0.72</span></td><td class="num">480–560 kW</td></tr>
+              <tr><td><span class="cn">巡航功率</span><span class="en">Cruise power</span></td><td><span class="cn">P = mg·V / (L/D·η)；L/D≈11–13，V=64 m/s</span><span class="en">L/D≈11–13 at 64 m/s</span></td><td class="num">150–185 kW</td></tr>
+              <tr><td><span class="cn">200 km 任务能量</span><span class="en">Mission energy</span></td><td><span class="cn">巡航 52 min + 起降/爬升 + 15% 余量</span><span class="en">52 min cruise + vertical phases + 15% reserve</span></td><td class="num">140–170 kWh</td></tr>
+              <tr><td><span class="cn">电池质量</span><span class="en">Pack mass</span></td><td><span class="cn">320 Wh/kg 电芯、成组率 80%</span><span class="en">320 Wh/kg cells, 80% integration</span></td><td class="num">550–660 kg</td></tr>
+              <tr><td><span class="cn">电池质量占比</span><span class="en">Mass fraction</span></td><td><span class="cn">电池质量 / 2,500 kg</span><span class="en">Pack / MTOW</span></td><td class="num">22%–26%</td></tr>
+              <tr><td><span class="cn">峰值放电倍率</span><span class="en">Peak C-rate</span></td><td><span class="cn">起飞 600–700 kW / 155 kWh</span><span class="en">600–700 kW over ~155 kWh</span></td><td class="num">3.9–4.5C</td></tr>
+              <tr><td><span class="cn">装机功率</span><span class="en">Installed power</span></td><td><span class="cn">8 × &gt;200 kW（媒体口径）</span><span class="en">8 × &gt;200 kW (reported)</span></td><td class="num">&gt;1.6 MW</td></tr>
+              <tr><td><span class="cn">能量强度</span><span class="en">Energy intensity</span></td><td><span class="cn">155 kWh / (4 座 × 200 km)</span><span class="en">per seat-km, 4 passengers</span></td><td class="num">≈0.19 kWh/座·km</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="tbl-note"><span class="cn">模型校验：按 230 km/h 巡航、200 km 航程，纯巡航时间约 52 分钟；若电池为 155 kWh，则巡航段平均功率必须控制在 150 kW 量级，与 L/D≈11—13 的假设自洽。若实际 L/D 低于 9，200 km 航程在 500 kg 商载下将难以成立——这也是“200 km 是设计值而非满载实测”的原因。</span><span class="en">Sanity check: 200 km at 230 km/h is about 52 minutes of cruise; with 155 kWh, average cruise power must stay near 150 kW, consistent with L/D≈11–13. If actual L/D is below 9, 200 km with 500 kg payload becomes hard — hence “design value, not full-load demonstrated”.</span></p>
+
+        <p><span class="cn">这笔账揭示了三件事。第一，<b>电池质量占比 22%—26% 是合理但偏紧的</b>：它给结构与商载留下的余量不大，任何超重都会直接吃掉航程。第二，<b>峰值放电倍率约 4C</b>，正好落在企业宣称的 5C 放电能力之内，说明“电池能撑住起飞”在物理上成立，但会加速产热与老化。第三，<b>装机功率 1.6 MW 是需求功率的 2.3 倍以上</b>——这不是浪费，而是为了在“对角两台失效”后仍保留悬停能力所付出的重量代价。</span><span class="en">Three implications follow. A 22–26% battery mass fraction is plausible but tight: little margin for structural growth or payload, and any overweight directly cuts range. A ~4C peak sits inside the claimed 5C discharge capability, so take-off is physically credible but thermally and cyclically costly. And 1.6 MW installed against ~0.7 MW required — over 2.3× — is the weight price of retaining hover after two diagonal failures.</span></p>
+
+        <h3><span class="cn">5.2 过渡走廊：最关键、也最不透明的一段</span><span class="en">5.2 The transition corridor: critical and opaque</span></h3>
+
+        <p><span class="cn">过渡走廊可以理解为“速度—高度—姿态—功率”四维空间中的安全通道：速度太低，机翼没有升力；速度太高，旋翼进入不利来流；姿态变化过快，飞控来不及配平。全倾转飞机通常在 30—50 m/s 完成过渡，走廊宽度以秒计。AE200 由于保留四个固定升力轴，理论上可以把走廊切分为“升力轴保底 + 倾转轴渐进”的两段式过渡，降低对精确时序的依赖；但这也意味着过渡期间八个轴的气动干扰更复杂。</span><span class="en">The transition corridor is a safe channel in speed–altitude–attitude–power space: too slow and the wing cannot carry weight, too fast and rotor inflow degrades, too abrupt and control cannot trim. Full-tilt designs typically transition around 30–50 m/s within seconds. With four fixed lift axes, AE200 can in principle split transition into a lift-backed phase and a progressive tilt phase, reducing timing sensitivity — at the cost of more complex eight-rotor interference.</span></p>
+
+        <p><span class="cn">公开信息只告诉我们“完成了全包线过渡”，没有给出走廊边界、最小安全速度、单发失效后的过渡策略与最大过渡速率。对适航审定，这些是专用条件与飞行手册的核心内容；对运营商，它们决定了起降场周边必须预留多少净空与噪声缓冲区。因此，<b>“完成过渡试飞”是工程里程碑，不是运行许可</b>。</span><span class="en">Public information confirms the full-envelope transition but not corridor boundaries, minimum safe speed, one-engine-out transition strategy or maximum transition rate. These are core special-condition and flight-manual content, and they determine obstacle clearance and noise buffers around vertiports. A transition flight test is an engineering milestone, not an operating approval.</span></p>
+
+        <h3><span class="cn">5.3 能力层级：把“可行”拆成四级</span><span class="en">5.3 Capability levels: splitting “feasible” into four</span></h3>
+
+        <div class="table-wrap">
+          <table>
+            <caption><span class="cn">表 5　技术可行性的四级判据</span><span class="en">Table 5. Four levels of technical feasibility</span></caption>
+            <thead><tr>
+              <th><span class="cn">层级</span><span class="en">Level</span></th>
+              <th><span class="cn">定义</span><span class="en">Definition</span></th>
+              <th><span class="cn">公开证据</span><span class="en">Public evidence</span></th>
+              <th><span class="cn">判定</span><span class="en">Assessment</span></th>
+            </tr></thead>
+            <tbody>
+              <tr><td>L1 <span class="cn">演示</span><span class="en">Demo</span></td><td><span class="cn">完成垂直起降、过渡与巡航的完整循环</span><span class="en">Complete vertical–transition–cruise cycle</span></td><td><span class="cn">2024-06 全尺寸全重量全包线试飞</span><span class="en">June 2024 full-scale flight</span></td><td><span class="chip good"><span class="cn">已达成</span><span class="en">Achieved</span></span></td></tr>
+              <tr><td>L2 <span class="cn">工程验证</span><span class="en">Qualified</span></td><td><span class="cn">包线、故障、环境与寿命证据闭环</span><span class="en">Envelope, failure, environment and life evidence</span></td><td><span class="cn">三鸟台、振动、热失控、有人驾驶试飞</span><span class="en">Rigs, vibration, thermal runaway, manned flights</span></td><td><span class="chip est"><span class="cn">进行中</span><span class="en">In progress</span></span></td></tr>
+              <tr><td>L3 <span class="cn">运输运行</span><span class="en">Transport ops</span></td><td><span class="cn">在监管空域内重复载客并保持可用率</span><span class="en">Repeatable passenger ops with dispatch reliability</span></td><td><span class="cn">TC/PC/AC/OC 与运行数据均缺</span><span class="en">TC/PC/AC/OC and operating data missing</span></td><td><span class="chip open"><span class="cn">未证明</span><span class="en">Not proven</span></span></td></tr>
+              <tr><td>L4 <span class="cn">规模经济</span><span class="en">Scale economics</span></td><td><span class="cn">单位成本低于替代交通方式</span><span class="en">Unit cost below alternatives</span></td><td><span class="cn">无公开成本结构</span><span class="en">No public cost structure</span></td><td><span class="chip open"><span class="cn">不成立</span><span class="en">Not met</span></span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><span class="cn">用这四级看，AE200 处在 L1 已达成、L2 进行中的位置。它与亿航 EH216-S 的差别不是“谁更先进”，而是产品路线不同：EH216-S 用多旋翼换取了更简单的构型与更早的取证，代价是 30 km 航程与 130 km/h 速度；AE200 用倾转构型换取 200 km 与 230 km/h，代价是更长的审定周期与更高的工程风险。两条路线没有绝对优劣，只有场景匹配。</span><span class="en">AE200 sits at L1 achieved, L2 in progress. Its difference from EHang’s EH216-S is not sophistication but route: the multirotor trades range and speed (30 km, 130 km/h) for a simpler configuration and earlier certification; the tilt-rotor trades certification time and engineering risk for 200 km and 230 km/h. Neither is universally superior — only scenario-fit differs.</span></p>
+      </section>
+
+      <section class="sec" id="safety">
+        <div class="sec-head">
+          <div class="sec-num">06</div>
+          <div><h2><span class="cn">安全、适航与 SOTIF</span><span class="en">Safety, airworthiness and SOTIF</span><span class="sub">Certification is a process, not a badge</span></h2></div>
+        </div>
+
+        <p class="lede"><span class="cn">对载人 eVTOL，安全不是“多装几个备份”的加法，而是一套从危险识别到运行限制的闭环。AE200 的挑战在于：它同时是新材料、新构型、新动力与新运行概念，局方与企业必须一边审定一边写标准。</span><span class="en">For passenger eVTOL, safety is not additive redundancy but a closed loop from hazard identification to operating limits. AE200 is simultaneously new materials, new configuration, new propulsion and new operations; regulator and applicant must write standards while certifying.</span></p>
+
+        <h3><span class="cn">6.1 监管路径：四张证，五道关</span><span class="en">6.1 The regulatory path: four certificates, five stages</span></h3>
+
+        <p><span class="cn">AE200-100 走的是 CCAR-21-R4 第 21.17 条下的“特殊类别航空器”路径。由于现行规章没有为“多旋翼 + 固定翼”的倾转构型准备完整审定标准，民航西南局为其制定了专用条件 SC-21-006，参考 EASA SC-VTOL、CCAR-23/27 与相关电池标准，作为 G1 审定基础；这也是全国首个面向 5—6 座有人驾驶 eVTOL 的专用条件。<a class="cite" href="#ref3">[3]</a><a class="cite" href="#ref4">[4]</a><a class="cite" href="#ref26">[26]</a></span><span class="en">AE200-100 follows the special-class route under CCAR-21-R4 §21.17. With no complete standard for a multirotor-plus-wing tilt configuration, the Southwest Regional Administration issued special condition SC-21-006, drawing on EASA SC-VTOL, CCAR-23/27 and battery standards, as the G1 certification basis — China’s first for a 5–6 seat manned eVTOL.</span></p>
+
+        <div class="table-wrap">
+          <table>
+            <caption><span class="cn">表 6　证件状态（截至 2026-11-24）</span><span class="en">Table 6. Certificate status as of 24 November 2026</span></caption>
+            <thead><tr>
+              <th><span class="cn">证件</span><span class="en">Certificate</span></th>
+              <th><span class="cn">作用</span><span class="en">Function</span></th>
+              <th><span class="cn">状态</span><span class="en">Status</span></th>
+              <th><span class="cn">关键节点</span><span class="en">Milestone</span></th>
+            </tr></thead>
+            <tbody>
+              <tr><td><b>TC</b></td><td><span class="cn">型号设计符合适航要求</span><span class="en">Design approval</span></td><td><span class="chip off"><span class="cn">审定第四阶段</span><span class="en">TC Stage 4</span></span></td><td><span class="cn">2022-11 受理；G1、DAS、AEG、CP 已完成</span><span class="en">Accepted 2022-11; G1, DAS, AEG, CP done</span></td></tr>
+              <tr><td><b>PC</b></td><td><span class="cn">批量生产一致性</span><span class="en">Production approval</span></td><td><span class="chip est"><span class="cn">审定中</span><span class="en">In review</span></span></td><td><span class="cn">2025-05 受理；2025-06 首次会议</span><span class="en">Accepted 2025-05; first meeting 2025-06</span></td></tr>
+              <tr><td><b>AC</b></td><td><span class="cn">单机适航</span><span class="en">Airworthiness certificate</span></td><td><span class="chip open"><span class="cn">未开始</span><span class="en">Not started</span></span></td><td><span class="cn">需 TC 与 PC 支撑</span><span class="en">Requires TC and PC</span></td></tr>
+              <tr><td><b>OC</b></td><td><span class="cn">商业运行许可</span><span class="en">Operator certificate</span></td><td><span class="chip est"><span class="cn">以直升机先行</span><span class="en">Helicopter first</span></span></td><td><span class="cn">CCAR-135 证由通航主体持有</span><span class="en">CCAR-135 held by GA entity</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><span class="cn">需要强调，“第四阶段”不等于“临门一脚”。TC 审定通常分为概念设计、要求确定、符合性计划、符合性验证与最终批准五个阶段；第四阶段要完成大量地面试验、飞行试验与符合性文件审查，任何一项不符合都可能导致设计更改与重新验证。对倾转构型，最耗时的往往是过渡段飞行试验、单发/多发失效试验与电池热失控验证。企业口径“2026—2027 年”与媒体口径“2027 年”之间的差异，本身就反映了这种不确定性。<a class="cite" href="#ref7">[7]</a></span><span class="en">“Stage 4” is not the final step. TC work runs through concept, requirements, compliance planning, compliance verification and final approval; Stage 4 involves heavy ground and flight testing plus document review, and any finding can trigger redesign. For tilt-rotors, transition flight testing, engine-out testing and battery thermal-runaway validation tend to dominate. The gap between “2026–2027” and “2027” is itself the uncertainty.</span></p>
+
+        <h3><span class="cn">6.2 安全目标：分系统很漂亮，整机仍缺一个数</span><span class="en">6.2 Safety objectives: strong subsystems, one missing aircraft-level number</span></h3>
+
+        <p><span class="cn">公开材料给出的安全指标都停在分系统层级：电池系统 DAL-B、电芯失效率 10⁻⁸—10⁻⁹、航电平台 10⁻⁸/FH、20G 坠撞、多电芯热失控包容。这些数字放在汽车行业是“远超国标”，放在航空行业只是“进入门槛”。真正决定整机安全水平的是：<b>整机灾难性失效概率目标是多少、如何分配到各系统、如何用独立性论证避免共因失效</b>。SC-VTOL 对载人 VTOL 的灾难性失效目标通常在 10⁻⁹/FH 量级，但 AE200 专用条件的具体数值尚未公开检索到。<a class="cite" href="#ref3">[3]</a><a class="cite" href="#ref26">[26]</a></span><span class="en">Public figures stop at subsystem level: DAL-B batteries, 10⁻⁸–10⁻⁹ cell failure, 10⁻⁸/FH avionics, 20G crash, thermal-runaway containment. Impressive against automotive standards, these are entry thresholds in aviation. What determines aircraft safety is the whole-aircraft catastrophic target, its allocation and the independence argument against common-mode failure. SC-VTOL-type targets are around 10⁻⁹/FH, but AE200’s specific value is not publicly retrievable.</span></p>
+
+        <p><span class="cn">还有一个结构性问题：电池系统按 DAL-B 设计，而 DAL-B 对应的定量目标通常比 DAL-A 低一个数量级。对于“电池热失控导致失去全部动力”这类灾难性后果，DAL-B 是否足够，取决于架构能否证明热失控不会跨包传播、且剩余包仍能支撑着陆。企业用“四包独立 + 独立泄压 + 热包容”回答这个问题，但缺乏公开的故障树与定量分析。</span><span class="en">There is also a structural question: DAL-B batteries normally carry a quantitative target an order of magnitude below DAL-A. For “thermal runaway removes all power” — a catastrophic outcome — DAL-B sufficiency depends on proving propagation is contained and remaining packs can land the aircraft. Four independent packs, dedicated vents and containment are the answer, but the fault tree and quantitative analysis are not public.</span></p>
+
+        <h3><span class="cn">6.3 风险矩阵：从危险到证据</span><span class="en">6.3 Risk matrix: from hazard to evidence</span></h3>
+
+        <div class="table-wrap">
+          <table>
+            <caption><span class="cn">表 7　主要危险与所需证据</span><span class="en">Table 7. Principal hazards and required evidence</span></caption>
+            <thead><tr>
+              <th><span class="cn">风险域</span><span class="en">Domain</span></th>
+              <th><span class="cn">可能危害</span><span class="en">Hazard</span></th>
+              <th><span class="cn">缓解设计</span><span class="en">Mitigation</span></th>
+              <th><span class="cn">公开证据</span><span class="en">Public evidence</span></th>
+            </tr></thead>
+            <tbody>
+              <tr><td><span class="cn">倾转机构</span><span class="en">Tilt</span></td><td><span class="cn">卡阻、非指令倾转、过渡中断</span><span class="en">Jam, uncommanded tilt, aborted transition</span></td><td><span class="cn">外四轴独立升力、故障隔离</span><span class="en">Independent outboard lift, isolation</span></td><td><span class="chip est"><span class="cn">振动与铁鸟试验</span><span class="en">Vibration / rig tests</span></span></td></tr>
+              <tr><td><span class="cn">电池</span><span class="en">Battery</span></td><td><span class="cn">热失控、跨包传播、起火</span><span class="en">Thermal runaway, propagation, fire</span></td><td><span class="cn">四包独立、泄压通道、热障</span><span class="en">Four packs, vents, barriers</span></td><td><span class="chip off"><span class="cn">燃烧弹 / ARC / 模组试验</span><span class="en">Bullet / ARC / module tests</span></span></td></tr>
+              <tr><td><span class="cn">过渡控制</span><span class="en">Transition</span></td><td><span class="cn">升力不足、姿态失控</span><span class="en">Lift shortfall, loss of attitude</span></td><td><span class="cn">两段式过渡、包线保护</span><span class="en">Two-phase transition, envelope protection</span></td><td><span class="chip open"><span class="cn">走廊边界未公开</span><span class="en">Corridor undisclosed</span></span></td></tr>
+              <tr><td><span class="cn">地面人员</span><span class="en">Ground crew</span></td><td><span class="cn">桨叶撞击、下洗流</span><span class="en">Rotor strike, downwash</span></td><td><span class="cn">高位旋翼、三层侧倾、隔离区</span><span class="en">High rotors, canted layers, exclusion</span></td><td><span class="chip est"><span class="cn">设计描述</span><span class="en">Design description</span></span></td></tr>
+              <tr><td><span class="cn">坠撞</span><span class="en">Crash</span></td><td><span class="cn">乘员伤害、起火</span><span class="en">Occupant injury, fire</span></td><td><span class="cn">全剖面坠撞保护、20G 模组</span><span class="en">Section crash protection, 20G modules</span></td><td><span class="chip est"><span class="cn">设计描述</span><span class="en">Design description</span></span></td></tr>
+              <tr><td><span class="cn">水上</span><span class="en">Ditching</span></td><td><span class="cn">迫降后沉没</span><span class="en">Sinking after ditching</span></td><td><span class="cn">漂浮设计</span><span class="en">Flotation</span></td><td><span class="chip est"><span class="cn">设计描述</span><span class="en">Design description</span></span></td></tr>
+              <tr><td><span class="cn">人为因素</span><span class="en">Human factors</span></td><td><span class="cn">模式混淆、接管过晚</span><span class="en">Mode confusion, late takeover</span></td><td><span class="cn">SVO1、三级告警</span><span class="en">SVO1, tiered alerts</span></td><td><span class="chip open"><span class="cn">无场景证据</span><span class="en">No scenario evidence</span></span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3><span class="cn">6.4 SOTIF：没有故障，也会不安全</span><span class="en">6.4 SOTIF: unsafe without a failure</span></h3>
+
+        <p><span class="cn">ISO 21448（SOTIF）关心的是“系统都正常工作，但功能或性能不足导致危险”。对 AE200，典型场景包括：低空阵风超出预期、起降场周边障碍物识别不足、飞行员对 SVO 模式边界理解错误、地面人员进入旋翼危险区、电池在低温下功率受限而告警不及时。这些风险不来自硬件失效，而来自“设计没有覆盖到的合理使用与可预见误用”。</span><span class="en">ISO 21448 addresses hazards arising when everything works but functionality or performance is insufficient: unexpected low-altitude gusts, obstacle detection gaps near vertiports, pilot misunderstanding of SVO boundaries, ground crew entering rotor zones, or cold-temperature power limits without timely alerts. These are not hardware failures but uncovered reasonable use and foreseeable misuse.</span></p>
+
+        <p><span class="cn">目前公开信息没有 AE200 的 SOTIF 专项工作、场景清单或验证方法。这不意味着企业没有做——适航审定本身就要求系统安全评估——而是意味着外部研究者无法判断其覆盖度。对一款计划在城市与景区上空载客的飞行器，SOTIF 的公开透明度会直接影响公众信任与保险定价。</span><span class="en">No AE200-specific SOTIF work, scenario list or validation method is public. That does not mean it is absent — certification mandates system safety assessment — but external observers cannot judge coverage. For an aircraft intended to carry passengers over cities and scenic areas, SOTIF transparency will affect public trust and insurance pricing.</span></p>
+
+        <h3><span class="cn">6.5 与直升机的安全基准对比</span><span class="en">6.5 Benchmarking against helicopters</span></h3>
+
+        <p><span class="cn">传统直升机的事故率大约在每 10 万飞行小时个位数到十余起，致命事故率约每 10 万小时 1 起量级；eVTOL 的适航目标是把灾难性失效压到 10⁻⁹/FH 量级，理论上比直升机低两到三个数量级。但“目标”与“实现”之间隔着运行经验：早期机队的事故率通常由人为因素、维护差错与运行环境决定，而不是设计指标。亿航 EH216-S 取证后交付量在 2026 年一季度骤降至 4 架，也说明“取证—交付—运营”之间的爬坡远比证书本身复杂。<a class="cite" href="#ref27">[27]</a> 2025 年 9 月 16 日长春航展，两架小鹏汇天 eVTOL 因编队间距不足发生接触，一架着陆后起火，至少 1 人受伤；调查结论未见公开，但它提醒行业：<b>演示飞行的编排风险，可能比技术故障更早触发公众与监管的负面反应</b>。<a class="cite" href="#ref40">[40]</a></span><span class="en">Helicopter accident rates run from single digits to low teens per 100,000 flight hours, with fatal accidents around one per 100,000 hours; eVTOL certification targets catastrophic failure near 10⁻⁹/FH, two to three orders lower in theory. But targets are not field experience: early fleets are shaped by human factors, maintenance error and operating environment. EHang’s deliveries falling to four units in Q1 2026 shows how hard the certification-to-delivery-to-operations ramp is. At the Changchun airshow on 16 September 2025, two XPeng AeroHT eVTOLs touched during a formation display; one caught fire on landing and at least one person was injured. No investigation report is public, but it shows that <b>display-choreography risk can trigger public and regulatory backlash earlier than technical failure</b>.</span></p>
+
+        <p><span class="cn">更现实的比较是“同任务风险”：在景区观光、机场接驳这类 20—100 km 的短途任务中，直升机的风险主要来自低空障碍、天气与人为失误；eVTOL 把这些风险部分转移到电池、软件与地面基础设施。它未必更安全，只是把风险换了位置——而监管与保险必须重新定价这些新位置。</span><span class="en">A more realistic comparison is task-level risk. On 20–100 km sightseeing or airport transfers, helicopter risk concentrates in low-altitude obstacles, weather and human error; eVTOL shifts part of it to batteries, software and ground infrastructure. It may not be safer — it relocates risk, and regulation and insurance must reprice the new locations.</span></p>
+      </section>
+
+
+      <section class="sec" id="scenarios">
+        <div class="sec-head">
+          <div class="sec-num">07</div>
+          <div><h2><span class="cn">应用场景：技术可行、运营可行与市场可行是三件事</span><span class="en">Scenarios: technical, operational and market feasibility differ</span><span class="sub">Where 200 km actually pays</span></h2></div>
+        </div>
+
+        <p class="lede"><span class="cn">200 km 航程是一个尴尬的数字：对城市内通勤太长，对省际出行太短。它真正适配的是“城市群内的点到点”——景区到景区、机场到市区、城市到卫星城。场景选错，再好的飞行器也只能做演示。</span><span class="en">200 km is an awkward number: too long for intra-city commuting, too short for inter-provincial travel. It fits point-to-point within city clusters — scenic site to scenic site, airport to downtown, city to satellite town. Choose the wrong scenario and even a good aircraft becomes a demonstrator.</span></p>
+
+        <div class="table-wrap">
+          <table>
+            <caption><span class="cn">表 8　场景适配矩阵（5 分制，定性评估）</span><span class="en">Table 8. Scenario fit matrix (5-point qualitative scale)</span></caption>
+            <thead><tr>
+              <th><span class="cn">场景</span><span class="en">Scenario</span></th>
+              <th class="num"><span class="cn">技术适配</span><span class="en">Technical</span></th>
+              <th class="num"><span class="cn">监管难度</span><span class="en">Regulatory</span></th>
+              <th class="num"><span class="cn">支付意愿</span><span class="en">Willingness</span></th>
+              <th><span class="cn">综合判断</span><span class="en">Verdict</span></th>
+            </tr></thead>
+            <tbody>
+              <tr><td><span class="cn">低空文旅 / 景区观光</span><span class="en">Tourism / sightseeing</span></td><td class="num">5</td><td class="num">4</td><td class="num">5</td><td><span class="chip good"><span class="cn">近期最现实</span><span class="en">Most viable now</span></span></td></tr>
+              <tr><td><span class="cn">机场 / 高铁站接驳</span><span class="en">Airport / rail transfer</span></td><td class="num">5</td><td class="num">3</td><td class="num">4</td><td><span class="chip good"><span class="cn">可试点</span><span class="en">Pilot-ready</span></span></td></tr>
+              <tr><td><span class="cn">城市群城际短途</span><span class="en">Intercity within cluster</span></td><td class="num">4</td><td class="num">3</td><td class="num">3</td><td><span class="chip est"><span class="cn">情境依赖</span><span class="en">Context-dependent</span></span></td></tr>
+              <tr><td><span class="cn">应急医疗转运</span><span class="en">Emergency medical</span></td><td class="num">3</td><td class="num">2</td><td class="num">5</td><td><span class="chip est"><span class="cn">需专门构型</span><span class="en">Needs variant</span></span></td></tr>
+              <tr><td><span class="cn">城市日常通勤</span><span class="en">Urban commuting</span></td><td class="num">2</td><td class="num">1</td><td class="num">2</td><td><span class="chip open"><span class="cn">短期不可行</span><span class="en">Not near-term</span></span></td></tr>
+              <tr><td><span class="cn">物流货运</span><span class="en">Cargo</span></td><td class="num">2</td><td class="num">3</td><td class="num">2</td><td><span class="chip open"><span class="cn">应另做货机</span><span class="en">Cargo variant</span></span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="tbl-note"><span class="cn">评分为本文判断，不是企业数据。技术适配考虑航程、载荷、起降条件与维护；监管难度分数越高表示越容易；支付意愿反映目标客群为时间或体验付费的能力。</span><span class="en">Scores are this study’s judgement. Technical fit covers range, payload, take-off conditions and maintenance; higher regulatory scores mean easier approval; willingness reflects the target segment’s ability to pay for time or experience.</span></p>
+
+        <h3><span class="cn">7.1 低空文旅：第一个能算过账的场景</span><span class="en">7.1 Tourism: the first scenario that can balance</span></h3>
+
+        <p><span class="cn">成都给出的样本最有说服力：熊猫基地到青城山约 20 分钟，天府五街到双流机场约 5 分钟；企业计划未来两年在成都都市圈布设 100 个以上起降点，单座票价目标“与豪华网约车相当”。<a class="cite" href="#ref28">[28]</a> 文旅场景的优势在于：航线固定、客流可预测、乘客对价格不敏感、起降点可以建在景区外围，且监管可以采用“先观光、后通勤”的渐进路径。</span><span class="en">Chengdu is the clearest sample: about 20 minutes from the panda base to Qingcheng Mountain, about 5 minutes from Tianfu 5th Street to Shuangliu airport; the company plans 100+ vertiports in the metro area within two years and targets fares “comparable to premium ride-hailing”. Tourism offers fixed routes, predictable demand, price-insensitive passengers, peripheral vertiports and a gradual regulatory path from sightseeing to commuting.</span></p>
+
+        <p><span class="cn">但文旅的天花板也很清楚：它依赖“稀缺体验溢价”，而不是运输效率。一旦游客把“坐一次”变成“偶尔坐”，复购率就会下降；景区天气、客流季节性与单机日利用率会直接决定投资回收期。对运营商，文旅更像“航空版的高端游乐设施”，需要的是高可用率与低故障率，而不是 200 km 的航程。</span><span class="en">The ceiling is equally clear: tourism depends on scarcity premiums, not transport efficiency. Once “try once” replaces repeat use, repeat rates fall; weather, seasonality and daily utilisation determine payback. For operators it behaves like a premium amusement ride — availability and reliability matter more than 200 km range.</span></p>
+
+        <figure class="figure">
+          <img src="assets/ae200-vertiport.jpg" alt="AE200 在垂直起降场" width="1400" height="788" loading="lazy">
+          <figcaption><b><span class="cn">图 5</span><span class="en">Figure 5</span></b>　<span class="cn">AE200 在总部基地起降场。起降点密度、地面接驳与噪声缓冲，是场景能否成立的前置条件，而不是配套细节。图片：沃飞长空官方素材（场景示意）。</span><span class="en">AE200 at the headquarters vertiport. Vertiport density, ground access and noise buffers are preconditions, not afterthoughts. Image: Volant official assets (illustrative).</span></figcaption>
+        </figure>
+
+        <h3><span class="cn">7.2 机场接驳：时间价值最高，但起降点最贵</span><span class="en">7.2 Airport transfer: highest time value, costliest vertiports</span></h3>
+
+        <p><span class="cn">机场接驳是 eVTOL 最经典的商业假设：避开地面拥堵，把 45—60 分钟的车程压缩到 10—15 分钟。AE200 的 200 km 航程在这里是“过剩能力”，真正决定成败的是起降点能否建在航站楼附近、空域能否与民航进近程序隔离、以及单座价格能否落在商务旅客的报销范围内。天府机场到市区的 15 分钟航线，需要的是“机场侧垂直起降坪 + 市区屋顶/地面起降点 + 专用低空航线”三件套，任何一件缺失都会让时间优势被地面接驳吃掉。</span><span class="en">Airport transfer is the classic eVTOL case: bypass congestion and cut a 45–60 minute drive to 10–15 minutes. AE200’s 200 km is surplus here; success depends on vertiports near terminals, airspace segregated from airline approaches, and fares within corporate travel budgets. A 15-minute Tianfu airport route needs an airport-side pad, a city-side vertiport and a dedicated low-altitude corridor — missing any one erodes the time advantage.</span></p>
+
+        <p><span class="cn">经济性上，机场接驳的单座价格可以显著高于文旅（商务旅客的时间价值更高），但起降点的土地与建设成本也最高。这意味着它更适合“由机场集团或地方平台投资起降点、运营商轻资产执飞”的模式，而不是运营商自建基础设施。</span><span class="en">Economically, airport seats can price above tourism because business travellers value time more, but vertiport land and construction cost the most. That favours airport groups or local platforms owning infrastructure while operators run aircraft asset-light.</span></p>
+
+        <h3><span class="cn">7.3 城际短途与应急医疗：需要不同的产品</span><span class="en">7.3 Intercity and medical: different products needed</span></h3>
+
+        <p><span class="cn">城际短途（如成都—重庆、深圳—珠海）看起来最匹配 200 km，但它面对的是高铁的绝对优势：票价、准点率、运力与市区到市区的可达性。eVTOL 只有在“高铁站偏远、公路拥堵、时间价值极高”的走廊里才有机会，例如跨江、跨湾、山区。应急医疗则是另一个逻辑：它需要的是“舱内可放担架、可接监护设备、可在夜间与复杂气象下运行”，而不是六个真皮座椅；AE200 的医疗型别目前仍在规划阶段，尚未公开舱内构型与适航补充要求。<a class="cite" href="#ref1">[1]</a></span><span class="en">Intercity routes such as Chengdu–Chongqing or Shenzhen–Zhuhai look like a range match but compete with high-speed rail on fare, punctuality, capacity and city-centre access. eVTOL only wins in corridors where rail stations are remote, roads are congested and time value is extreme — river crossings, bays, mountains. Medical transport needs stretchers, monitors and night/all-weather capability, not six leather seats; the medical variant is still planned, with no public cabin or supplemental certification requirements.</span></p>
+
+        <h3><span class="cn">7.4 城市通勤：短期不成立的四个理由</span><span class="en">7.4 Urban commuting: four reasons it does not work yet</span></h3>
+
+        <ol>
+          <li><span class="cn"><b>起降点密度不足。</b>城市通勤要求“步行 10 分钟到起降点”，而一座起降场的服务半径通常只有 3—5 km；在起降点达到数百个之前，门到门时间不会优于地铁。</span><span class="en"><b>Vertiport density.</b> Commuting needs a pad within a 10-minute walk; a vertiport serves only 3–5 km. Until hundreds exist, door-to-door time loses to metro.</span></li>
+          <li><span class="cn"><b>噪声与社区接受度。</b>企业宣称地面 45 dB(A)@300 m，但这是单次起降的测试口径；高频次起降的累积噪声、夜间运行与低频振动，会引发完全不同的社区反应。</span><span class="en"><b>Noise and acceptance.</b> The 45 dB(A) at 300 m claim is a single-event test; cumulative noise from frequent movements, night operations and low-frequency vibration triggers a different community response.</span></li>
+          <li><span class="cn"><b>成本。</b>第 8 节的测算显示座公里成本约 6—9 元，是网约车的 2—4 倍；没有补贴，通勤客群不会为“快 15 分钟”支付这个溢价。</span><span class="en"><b>Cost.</b> Section 8 estimates ¥6–9 per seat-km, 2–4× ride-hailing; without subsidy, commuters will not pay that for 15 minutes.</span></li>
+          <li><span class="cn"><b>空域与运行复杂度。</b>城市低空高频次、多运营商、多机型运行，需要 UOM、低空智联网与冲突探测的成熟；这套体系的建设进度慢于飞行器本身。</span><span class="en"><b>Airspace complexity.</b> High-frequency, multi-operator urban low-altitude traffic needs mature UOM, low-altitude networks and conflict detection — infrastructure that lags the aircraft.</span></li>
+        </ol>
+
+                <figure class="figure">
+          <img src="assets/ae200-city.jpg" alt="AE200 城市低空飞行场景渲染图" width="1400" height="788" loading="lazy">
+          <figcaption><b><span class="cn">图 6</span><span class="en">Figure 6</span></b>　<span class="cn">城市低空场景渲染图。它展示的是产品想象，而不是已获准的运行现实：城市通勤需要起降点、空域与噪声三张许可证同时到位。图片：沃飞长空官方素材（场景渲染）。</span><span class="en">Urban low-altitude rendering. It shows a product vision, not an approved operation: commuting needs vertiports, airspace and noise permits at the same time. Image: Volant official assets (rendering).</span></figcaption>
+        </figure>
+<div class="callout">
+          <b><span class="cn">场景结论</span><span class="en">Scenario conclusion</span></b>
+          <p><span class="cn">AE200 的商业化顺序应当是：<b>文旅（2027—2028）→ 机场接驳（2028—2029）→ 城际与应急（2029—2030）→ 城市通勤（2030 年以后，且取决于基础设施）</b>。任何把“城市空中出租车”当作首发场景的商业计划，都需要重新检查其起降点、票价与空域假设。</span><span class="en">The commercial sequence should be tourism (2027–28), airport transfer (2028–29), intercity and medical (2029–30), then commuting after 2030 subject to infrastructure. Any plan launching as an urban air taxi should re-check vertiports, fares and airspace assumptions.</span></p>
+        </div>
+      </section>
+
+      <section class="sec" id="market">
+        <div class="sec-head">
+          <div class="sec-num">08</div>
+          <div><h2><span class="cn">市场可行性：千架订单与每座公里成本</span><span class="en">Market feasibility: a thousand orders and a seat-kilometre</span><span class="sub">Commitments are not revenue</span></h2></div>
+        </div>
+
+        <p class="lede"><span class="cn">eVTOL 的市场分析最容易犯两个错误：把宏观“低空经济万亿市场”乘一个份额，或者把意向订单当作已确认收入。本文改用自下而上的方式：一架飞机一年能飞多少班、每班能收多少钱、成本是多少。</span><span class="en">eVTOL market analysis makes two easy mistakes: multiplying a trillion-yuan macro market by a share, or treating intentions as revenue. This section works bottom-up: flights per aircraft per year, revenue per flight, and cost.</span></p>
+
+        <h3><span class="cn">8.1 订单的质量</span><span class="en">8.1 The quality of the order book</span></h3>
+
+        <p><span class="cn">“千余架”是沃飞对外最常引用的数字，但拆开看，它由三类构成：<b>确认性订单</b>（如华龙航空 50 架）、<b>采购订单/框架协议</b>（如中航租赁、苏银金租合计 300 架、华龙首批 100 架）、<b>意向采购</b>（如工银金租 120 架、川发租赁 200 架）。三类的法律约束力、付款节奏与交付条件完全不同。<a class="cite" href="#ref8">[8]</a><a class="cite" href="#ref18">[18]</a><a class="cite" href="#ref19">[19]</a><a class="cite" href="#ref20">[20]</a></span><span class="en">“Over a thousand” comprises three tiers: firm orders (e.g., 50 from Hualong), purchase orders or frameworks (300 from AVIC and Suyin leasing; Hualong’s initial 100), and intentions (120 from ICBC Leasing, 200 from Chuanfa). Legal force, payment schedules and delivery conditions differ sharply.</span></p>
+
+        <p><span class="cn">租赁公司的大额订单尤其需要谨慎解读。金融租赁的目标是“资产配置 + 租金收益”，其订单往往附带“取证后生效”“首批交付后退租权”等条款；它们证明的是“市场对资产类别有兴趣”，而不是“终端用户已准备好付费乘坐”。对沃飞，租赁订单的真正价值是降低航空公司的资本门槛，把“卖飞机”变成“卖运力”。按公开信息加总，可核对的订单约 720 架，其中真正确认的只有 50 架——这就是“千架储备”与“可确认收入”之间的差距。<a class="cite" href="#ref8">[8]</a><a class="cite" href="#ref19">[19]</a><a class="cite" href="#ref20">[20]</a></span><span class="en">Large leasing orders need care. Lessors seek asset allocation and rental yield, often with conditions such as “effective upon certification” or return rights after initial delivery. They prove interest in an asset class, not end-user readiness to pay. Their real value is lowering the capital barrier for operators — selling capacity rather than aircraft. Publicly summable orders total roughly 720 units, of which only 50 are firm — the gap between a “thousand-unit reserve” and recognisable revenue.</span></p>
+
+        <h3><span class="cn">8.2 单位经济模型：一架飞机一年能赚多少</span><span class="en">8.2 Unit economics: what one aircraft can earn</span></h3>
+
+        <div class="table-wrap">
+          <table>
+            <caption><span class="cn">表 9　单机年度成本模型（本文估算，150 km 平均航段）</span><span class="en">Table 9. Annual per-aircraft cost model (this study, 150 km average sector)</span></caption>
+            <thead><tr>
+              <th><span class="cn">成本项</span><span class="en">Cost item</span></th>
+              <th><span class="cn">假设</span><span class="en">Assumption</span></th>
+              <th class="num"><span class="cn">元 / 年</span><span class="en">¥ / year</span></th>
+              <th class="num"><span class="cn">元 / 班</span><span class="en">¥ / flight</span></th>
+            </tr></thead>
+            <tbody>
+              <tr><td><span class="cn">折旧</span><span class="en">Depreciation</span></td><td><span class="cn">1,500 万元，10 年，残值 10%</span><span class="en">¥15m, 10 years, 10% residual</span></td><td class="num">1,350,000</td><td class="num">900</td></tr>
+              <tr><td><span class="cn">维修</span><span class="en">Maintenance</span></td><td><span class="cn">购机价 12% / 年</span><span class="en">12% of hull per year</span></td><td class="num">1,800,000</td><td class="num">1,200</td></tr>
+              <tr><td><span class="cn">保险</span><span class="en">Insurance</span></td><td><span class="cn">机身 + 责任险 4% / 年</span><span class="en">4% hull and liability</span></td><td class="num">600,000</td><td class="num">400</td></tr>
+              <tr><td><span class="cn">机组</span><span class="en">Crew</span></td><td><span class="cn">1 名飞行员 + 训练分摊</span><span class="en">One pilot plus training</span></td><td class="num">500,000</td><td class="num">333</td></tr>
+              <tr><td><span class="cn">地面与客服</span><span class="en">Ground / service</span></td><td><span class="cn">每班 200 元</span><span class="en">¥200 per flight</span></td><td class="num">300,000</td><td class="num">200</td></tr>
+              <tr><td><span class="cn">能源</span><span class="en">Energy</span></td><td><span class="cn">120 kWh × 1.0 元 + 充电摊销</span><span class="en">120 kWh at ¥1.0 plus charging</span></td><td class="num">330,000</td><td class="num">220</td></tr>
+              <tr><td><span class="cn">起降场</span><span class="en">Vertiport</span></td><td><span class="cn">每班 200 元</span><span class="en">¥200 per flight</span></td><td class="num">300,000</td><td class="num">200</td></tr>
+              <tr><td><span class="cn">管理与其他</span><span class="en">Overhead</span></td><td><span class="cn">上述合计 10%</span><span class="en">10% of the above</span></td><td class="num">518,000</td><td class="num">345</td></tr>
+              <tr><td><b><span class="cn">合计</span><span class="en">Total</span></b></td><td><span class="cn">1,500 班 / 年（6 班 × 250 天）</span><span class="en">1,500 flights (6 × 250 days)</span></td><td class="num"><b>5,698,000</b></td><td class="num"><b>3,798</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="tbl-note"><span class="cn">单座成本：3,798 ÷ 4 名乘客 ÷ 150 km ≈ <b>6.3 元/座·公里</b>。若按 200 km 航段，固定成本摊薄后约 5.4 元/座·公里。该模型未计销售费用、税费、备件库存与事故准备金，属于乐观口径；若计入电池更换（约 30 万元/组、800—1,000 次循环，折合 300—375 元/班），单班成本升至约 4,100—4,170 元，座公里成本约 6.8—7.0 元。</span><span class="en">Seat cost: ¥3,798 ÷ 4 passengers ÷ 150 km ≈ <b>¥6.3/seat-km</b>; about ¥5.4 on a 200 km sector as fixed costs spread. Excludes sales, tax, spares inventory and accident reserves — an optimistic view.</span></p>
+
+        <p><span class="cn">这个数字的含义很直接：它高于高铁二等座（约 0.4—0.6 元/公里）一个数量级，高于网约车（约 2—3 元/公里）两倍以上，但远低于直升机包机（约 30—60 元/座·公里）。所以 AE200 的价格带不在“公共交通”，而在“高端专车与直升机之间”。这也解释了为什么文旅与机场接驳先成立——这两类客群本来就为时间与体验支付溢价。</span><span class="en">The implication is direct: roughly an order of magnitude above high-speed rail (¥0.4–0.6/km), more than twice ride-hailing (¥2–3/km), but far below helicopter charter (¥30–60/seat-km). AE200 prices between premium car services and helicopters — which is why tourism and airport transfers come first.</span></p>
+
+        <h3><span class="cn">8.3 敏感性：利用率是生死线</span><span class="en">8.3 Sensitivity: utilisation is the lifeline</span></h3>
+
+        <div class="table-wrap">
+          <table>
+            <caption><span class="cn">表 10　座公里成本对利用率与票价的敏感性（150 km 航段）</span><span class="en">Table 10. Seat-km cost vs utilisation and fare (150 km sector)</span></caption>
+            <thead><tr>
+              <th><span class="cn">日班次 / 年班次</span><span class="en">Flights/day (year)</span></th>
+              <th class="num"><span class="cn">座公里成本</span><span class="en">Cost / seat-km</span></th>
+              <th class="num"><span class="cn">盈亏平衡票价</span><span class="en">Break-even fare</span></th>
+              <th><span class="cn">可行性判断</span><span class="en">Verdict</span></th>
+            </tr></thead>
+            <tbody>
+              <tr><td>3 / 750</td><td class="num">≈10.4 元</td><td class="num">≈1,560 元/座</td><td><span class="chip open">仅文旅溢价可覆盖</span></td></tr>
+              <tr><td>6 / 1,500</td><td class="num">≈6.3 元</td><td class="num">≈950 元/座</td><td><span class="chip est">机场接驳可试点</span></td></tr>
+              <tr><td>9 / 2,250</td><td class="num">≈4.8 元</td><td class="num">≈720 元/座</td><td><span class="chip good">接近高端专车</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="tbl-note"><span class="cn">敏感性结论：日利用率从 3 班提升到 9 班，座公里成本下降约 54%。因此“能不能卖出去”之前，先要回答“能不能一天飞 9 班”——这取决于充电速度（20 分钟）、周转时间、起降场容量与维修间隔。对企业，提升利用率的投资回报可能高于再降 10% 的制造成本。</span><span class="en">Raising utilisation from three to nine flights a day cuts seat-km cost by about 54%. Before asking “can we sell it”, ask “can it fly nine times a day” — which depends on 20-minute charging, turnaround, vertiport capacity and maintenance intervals. For the OEM, utilisation investment may pay more than another 10% manufacturing cost cut.</span></p>
+
+        <h3><span class="cn">8.4 市场规模：从宏观叙事到可服务市场</span><span class="en">8.4 Market size: from narrative to serviceable market</span></h3>
+
+        <p><span class="cn">按赛迪口径，中国低空经济核心产业 2023 年为 5,059.5 亿元、2024 年 6,702.5 亿元、2025 年约 8,591.7 亿元；民航局所说的“1.5 万亿元”包含关联带动，两者不可混用。赛迪与国信预测 2026 年约 1.06 万亿元、2030 年 2.0—2.5 万亿元。但其中载人 eVTOL 整机市场 2025 年只有约 57.5 亿元、2026 年预计 95 亿元——这是一个“小整机、大生态”的结构，整机销售额远小于基础设施、运营与服务的规模。<a class="cite" href="#ref41">[41]</a><a class="cite" href="#ref42">[42]</a> 对 AE200，更有意义的是三层漏斗：</span><span class="en">By CCID’s measure, China’s low-altitude core industry was ¥505.95bn in 2023, ¥670.25bn in 2024 and about ¥859.17bn in 2025; CAAC’s “¥1.5tn” includes indirect effects and is not comparable. CCID and Guosen forecast about ¥1.06tn in 2026 and ¥2.0–2.5tn by 2030. Yet the passenger eVTOL airframe market was only about ¥5.75bn in 2025 and a projected ¥9.5bn in 2026 — a “small airframe, large ecosystem” structure. A three-layer funnel is more useful:</span></p>
+
+        <p><span class="cn">政策与基础设施的节奏，决定这个漏斗的开口大小。2024 年“低空经济”首次写入政府工作报告；2026 年进一步被定位为“新兴支柱产业”；新修订的《民用航空法》于 2026 年 7 月施行，首次在法律层面要求空域划分兼顾低空经济；低空经济标准体系建设指南与 eVTOL 起降场团体标准也在 2024—2026 年间陆续发布。<a class="cite" href="#ref34">[34]</a><a class="cite" href="#ref35">[35]</a><a class="cite" href="#ref36">[36]</a><a class="cite" href="#ref37">[37]</a><a class="cite" href="#ref38">[38]</a> 对 AE200，这些不是背景板，而是前置条件：没有起降场标准，就没有可复制的建设成本；没有空域分类与航线审批规则，就没有可预期的运行时刻表。</span><span class="en">Policy and infrastructure set the width of the funnel. Low-altitude economy entered the 2024 government work report, was elevated to a “pillar industry” in 2026, and the revised Civil Aviation Law (effective July 2026) for the first time requires airspace classification to accommodate it; standards and vertiport guidance followed between 2024 and 2026. For AE200 these are preconditions: without vertiport standards there is no replicable construction cost, and without airspace classes and route rules there is no predictable schedule.</span></p>
+
+        <ul>
+          <li><span class="cn"><b>可服务市场（SAM）：</b>假设 2030 年中国有 50—100 个城市开通 eVTOL 载人航线，每个城市 2—4 个起降点、每个起降点 2—4 架飞机，对应 400—1,600 架的在役需求；按 10 年折旧，年新增需求约 40—160 架。</span><span class="en"><b>SAM:</b> 50–100 Chinese cities with passenger eVTOL routes by 2030, 2–4 vertiports each, 2–4 aircraft per vertiport — 400–1,600 aircraft in service, or 40–160 annual additions on a 10-year life.</span></li>
+          <li><span class="cn"><b>可获得市场（SOM）：</b>沃飞若占据 30%—40% 份额，对应年交付 12—64 架；以其“初期数十架、后续数百架”的产能规划看，需求端可能先于产能成为瓶颈。</span><span class="en"><b>SOM:</b> a 30–40% share implies 12–64 deliveries a year — demand may bind before capacity.</span></li>
+          <li><span class="cn"><b>单机收入：</b>按 1,500 万元/架，年交付 30 架对应 45 亿元收入；若加上维修、培训、充电与数据服务，全生命周期收入可再增加 20%—30%。</span><span class="en"><b>Revenue:</b> at ¥15m each, 30 aircraft a year is ¥4.5bn; MRO, training, charging and data could add 20–30% over the lifecycle.</span></li>
+        </ul>
+
+        <div class="table-wrap">
+          <table>
+            <caption><span class="cn">表 11　2028—2030 年交付与收入情景（本文情景，不是企业预测）</span><span class="en">Table 11. 2028–2030 delivery and revenue scenarios (this study, not company guidance)</span></caption>
+            <thead><tr>
+              <th><span class="cn">情景</span><span class="en">Scenario</span></th>
+              <th class="num"><span class="cn">年交付</span><span class="en">Units / year</span></th>
+              <th class="num"><span class="cn">单价</span><span class="en">Price</span></th>
+              <th class="num"><span class="cn">整机收入</span><span class="en">Revenue</span></th>
+              <th><span class="cn">成立条件</span><span class="en">Conditions</span></th>
+            </tr></thead>
+            <tbody>
+              <tr><td><span class="cn">保守</span><span class="en">Conservative</span></td><td class="num">15</td><td class="num">1,500 万</td><td class="num">22.5 亿</td><td><span class="cn">TC 2028 年，产能爬坡慢</span><span class="en">TC in 2028, slow ramp</span></td></tr>
+              <tr><td><span class="cn">基准</span><span class="en">Base</span></td><td class="num">40</td><td class="num">1,500 万</td><td class="num">60 亿</td><td><span class="cn">2027 取证，2028 交付，航线逐步开通</span><span class="en">TC 2027, deliveries 2028, routes open</span></td></tr>
+              <tr><td><span class="cn">积极</span><span class="en">Upside</span></td><td class="num">80</td><td class="num">1,400 万</td><td class="num">112 亿</td><td><span class="cn">多型别、海外订单与租赁模式同时放量</span><span class="en">Variants, exports, leasing all scale</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="tbl-note"><span class="cn">价格参照：国内媒体估算约 200 万元人民币（明显偏低，更接近轻型运动飞机口径），海外报道称单机超过 200 万美元。本文采用 1,500 万元人民币作为居中假设，并明确标注为估算。</span><span class="en">Price references conflict: domestic media cite about ¥2m (implausibly low for this class), while overseas reporting says over US$2m. This study uses ¥15m as a mid-point assumption.</span></p>
+
+        <h3><span class="cn">8.5 市场结论</span><span class="en">8.5 Market conclusion</span></h3>
+        <p><span class="cn">AE200 的市场可行性不是“有没有需求”，而是“需求是否愿意为当前成本结构付费”。在文旅与机场接驳场景，答案是“部分愿意”；在城市通勤场景，答案是“不愿意”。因此，千架订单能否转化，取决于三个变量：取证时间（决定交付起点）、起降点建设（决定航线密度）、单位成本下降（决定客群从高端向大众渗透的速度）。三者中任何一个延迟，都会让“千架”变成“长期框架”。</span><span class="en">The question is not whether demand exists but whether it will pay today’s cost structure. Tourism and airport transfers: partly yes. Commuting: no. Conversion of the thousand commitments depends on certification timing, vertiport build-out and unit-cost decline; delay in any one turns “a thousand” into a long-dated framework.</span></p>
+      </section>
+
+      <section class="sec" id="competition">
+        <div class="sec-head">
+          <div class="sec-num">09</div>
+          <div><h2><span class="cn">竞争格局：四条技术路线，四种取证节奏</span><span class="en">Competition: four architectures, four certification clocks</span><span class="sub">Not one race</span></h2></div>
+        </div>
+
+        <p><span class="cn">把 AE200 与亿航、峰飞、小鹏汇天、时的、Joby、Archer 放在一张表里，最容易得出的结论是“谁先取证谁赢”。但真实的竞争是按场景分层：多旋翼赢在短途观光与低门槛，复合翼赢在航程与成本折中，倾转旋翼赢在速度与航程，混动/增程赢在补能基础设施不足的市场。</span><span class="en">Putting AE200 beside EHang, AutoFlight, XPeng AeroHT, TCab, Joby and Archer invites the conclusion “first to certify wins”. Real competition is layered by scenario: multirotors win short sightseeing, lift-plus-cruise wins range-cost compromise, tilt-rotors win speed and range, hybrid designs win where charging infrastructure is thin.</span></p>
+
+        <div class="table-wrap">
+          <table>
+            <caption><span class="cn">表 12　主要竞品对比（截至 2026-11）</span><span class="en">Table 12. Competitor comparison (November 2026)</span></caption>
+            <thead><tr>
+              <th><span class="cn">机型</span><span class="en">Type</span></th>
+              <th><span class="cn">构型</span><span class="en">Layout</span></th>
+              <th class="num"><span class="cn">座</span><span class="en">Seats</span></th>
+              <th class="num"><span class="cn">航程 / 速度</span><span class="en">Range / speed</span></th>
+              <th><span class="cn">适航进度</span><span class="en">Certification</span></th>
+            </tr></thead>
+            <tbody>
+              <tr><td><b>AE200-100</b><br><span class="cn">沃飞长空</span><span class="en">Volant</span></td><td><span class="cn">倾转旋翼（内四倾转）</span><span class="en">Partial tilt</span></td><td class="num">1+4</td><td class="num">200 km / 230 km/h</td><td><span class="chip off"><span class="cn">TC 第四阶段</span><span class="en">TC Stage 4</span></span></td></tr>
+              <tr><td><b>EH216-S</b><br><span class="cn">亿航智能</span><span class="en">EHang</span></td><td><span class="cn">多旋翼</span><span class="en">Multirotor</span></td><td class="num">2</td><td class="num">30 km / 130 km/h</td><td><span class="chip good"><span class="cn">TC/PC/AC/OC 齐全</span><span class="en">All four certificates</span></span></td></tr>
+              <tr><td><b>V2000EM</b><br><span class="cn">峰飞航空</span><span class="en">AutoFlight</span></td><td><span class="cn">复合翼</span><span class="en">Lift + cruise</span></td><td class="num">1+4</td><td class="num">200 km / 200 km/h</td><td><span class="chip est"><span class="cn">TC 审定中，目标 2027</span><span class="en">In review, target 2027</span></span></td></tr>
+              <tr><td><b>E20</b><br><span class="cn">时的科技</span><span class="en">TCab Tech</span></td><td><span class="cn">倾转旋翼</span><span class="en">Tilt-rotor</span></td><td class="num">1+4</td><td class="num">200 km / 320 km/h</td><td><span class="chip est"><span class="cn">G1/G2/CP 已签，目标 2027</span><span class="en">G1/G2/CP signed, target 2027</span></span></td></tr>
+              <tr><td><b>A868</b><br><span class="cn">小鹏汇天</span><span class="en">XPeng AeroHT</span></td><td><span class="cn">全倾转混电</span><span class="en">Hybrid tilt</span></td><td class="num">6</td><td class="num">500 km+ / 360 km/h</td><td><span class="chip open"><span class="cn">全尺寸过渡试飞，TC 未受理</span><span class="en">Full-scale transition, TC not accepted</span></span></td></tr>
+              <tr><td><b>S4</b><br><span class="cn">Joby</span></td><td><span class="cn">全倾转</span><span class="en">Full tilt</span></td><td class="num">1+4</td><td class="num">161–241 km / 322 km/h</td><td><span class="chip off"><span class="cn">FAA TIA 第五阶段</span><span class="en">FAA TIA Stage 5</span></span></td></tr>
+              <tr><td><b>Midnight</b><br><span class="cn">Archer</span></td><td><span class="cn">倾转 + 固定升力</span><span class="en">Tilt + lift</span></td><td class="num">1+4</td><td class="num">160 km / 240 km/h</td><td><span class="chip off"><span class="cn">FAA 最终阶段</span><span class="en">FAA final stage</span></span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="tbl-note"><span class="cn">数据来源：企业官网、民航局公告与主流媒体报道，见参考文献 [27][29]—[33]。座位与性能为企业公开口径，未经本文实测；“适航进度”按各国审定阶段描述，不可直接横向比较。</span><span class="en">Sources: company sites, CAAC notices and press, refs [27][29]–[33]. Figures are company-reported; certification stages differ by jurisdiction and are not directly comparable.</span></p>
+
+        <h3><span class="cn">9.1 三条竞争轴</span><span class="en">9.1 Three axes of competition</span></h3>
+
+        <p><span class="cn"><b>第一轴：取证速度。</b>亿航用多旋翼换来了最早的 TC/PC/AC，但 2026 年一季度交付骤降至 4 架、二季度收入 7,790 万元同比下降 31.3% 并撤回全年指引，说明“先取证”不等于“先商业化”。<a class="cite" href="#ref27">[27]</a><a class="cite" href="#ref43">[43]</a> 沃飞、时的、峰飞都把目标放在 2027 年，真正的分水岭是“谁能在 2027 年拿到 TC 并同步完成 PC 与航线审批”。</span><span class="en"><b>Certification speed.</b> EHang’s multirotor won the earliest certificates, yet deliveries fell to four in Q1 2026 — first to certify is not first to commercialise. Volant, TCab and AutoFlight all target 2027; the divide is who can pair TC with PC and route approvals.</span></p>
+
+        <p><span class="cn"><b>第二轴：场景匹配。</b>EH216-S 的 30 km 航程只适合景区与短途观光；V2000EM 的复合翼在 200 km 级更省成本，但速度较低；AE200 与 E20 的倾转旋翼在 200 km 级提供更高速度，适合机场接驳与城际；A868 的混动方案瞄准 500 km+，但复杂度与重量更高。没有一款产品能覆盖所有场景。</span><span class="en"><b>Scenario fit.</b> EH216-S’s 30 km suits sightseeing; V2000EM’s lift-plus-cruise is cost-efficient at 200 km but slower; AE200 and E20 offer speed at 200 km for airport and intercity; A868’s hybrid targets 500 km+ at higher complexity. No product covers all scenarios.</span></p>
+
+        <p><span class="cn"><b>第三轴：资本与产业协同。</b>沃飞背靠吉利，具备供应链、制造与质量管理体系；亿航是上市公司但收入波动大；峰飞与宁德时代等供应链深度绑定；Joby 与丰田、Delta 合作；Archer 与 United、Stellantis 合作。eVTOL 的竞争最终是“供应链 + 资本 + 运行网络”的竞争，而不是单一机型参数。</span><span class="en"><b>Capital and industrial synergy.</b> Volant leverages Geely’s supply chain and manufacturing; EHang is listed but volatile; AutoFlight is tied to CATL-era supply chains; Joby partners with Toyota and Delta; Archer with United and Stellantis. The endgame is supply chain, capital and operating networks — not spec sheets.</span></p>
+
+        <h3><span class="cn">9.2 沃飞的位置</span><span class="en">9.2 Where Volant sits</span></h3>
+        <p><span class="cn">沃飞是国内唯一进入 TC 第四阶段的有人驾驶倾转旋翼企业，这是实打实的先发优势；但它的短板同样明显：没有海外适航申请记录、没有商业交付记录、运行体系依赖合作伙伴、公开技术披露的颗粒度低于 Joby 与 Archer。它的机会窗口是 2027—2029 年——如果那时中国低空基础设施与航线审批同步成熟，先发取证可以转化为网络效应；如果基础设施滞后，先发优势会被“等待成本”抵消。</span><span class="en">Volant is the only Chinese manned tilt-rotor in TC Stage 4 — a genuine lead. Its gaps are equally clear: no overseas certification filing, no commercial deliveries, operations dependent on partners, and less technical disclosure than Joby or Archer. Its window is 2027–2029: if Chinese infrastructure and route approvals mature in step, first-mover certification becomes a network effect; if not, waiting costs erase the lead.</span></p>
+      </section>
+
+
+      <section class="sec" id="roadmap">
+        <div class="sec-head">
+          <div class="sec-num">10</div>
+          <div><h2><span class="cn">工程化与商业化路线图</span><span class="en">Engineering and commercial roadmap</span><span class="sub">Four gates, not one date</span></h2></div>
+        </div>
+
+        <p class="lede"><span class="cn">“2027 年取证”只是一个日期。真正决定 AE200 成败的，是四道门槛能否依次通过；任何一道卡住，后面的商业模型都要重算。</span><span class="en">“Certification in 2027” is only a date. Four gates decide the outcome; if any one stalls, the business model must be recalculated.</span></p>
+
+        <div class="table-wrap">
+          <table>
+            <caption><span class="cn">表 13　四道 Go / No-Go 门槛</span><span class="en">Table 13. Four Go/No-Go gates</span></caption>
+            <thead><tr>
+              <th style="width:20%"><span class="cn">门槛</span><span class="en">Gate</span></th>
+              <th><span class="cn">判据</span><span class="en">Criteria</span></th>
+              <th><span class="cn">当前状态</span><span class="en">Status</span></th>
+              <th><span class="cn">主要风险</span><span class="en">Main risk</span></th>
+            </tr></thead>
+            <tbody>
+              <tr><td style="white-space:nowrap"><b>G1 型号取证</b></td><td><span class="cn">TC 颁发；过渡、单发失效、热失控、坠撞符合性关闭</span><span class="en">TC issued; transition, engine-out, thermal runaway and crash compliance closed</span></td><td><span class="chip off"><span class="cn">第四阶段</span><span class="en">Stage 4</span></span></td><td><span class="cn">载人试飞发现问题导致设计更改</span><span class="en">Findings in manned flight forcing redesign</span></td></tr>
+              <tr><td style="white-space:nowrap"><b>G2 交付与运行</b></td><td><span class="cn">PC + AC + OC；航线批准；机组与机务培训体系</span><span class="en">PC, AC, OC; route approvals; crew and maintenance training</span></td><td><span class="chip est"><span class="cn">PC 审定中</span><span class="en">PC in review</span></span></td><td><span class="cn">地方空域与起降点审批慢于取证</span><span class="en">Airspace and vertiport approvals lag certification</span></td></tr>
+              <tr><td style="white-space:nowrap"><b>G3 单位经济</b></td><td><span class="cn">日利用率 ≥6 班；座公里成本 ≤6 元；票价 ≥8 元/公里可售</span><span class="en">≥6 flights/day; ≤¥6/seat-km; sellable at ≥¥8</span></td><td><span class="chip open"><span class="cn">未验证</span><span class="en">Unverified</span></span></td><td><span class="cn">维修与保险成本高于预期</span><span class="en">Maintenance and insurance above plan</span></td></tr>
+              <tr><td style="white-space:nowrap"><b>G4 规模与安全记录</b></td><td><span class="cn">100 架在役、10 万飞行小时、可接受的事故率</span><span class="en">100 aircraft, 100k flight hours, acceptable incident rate</span></td><td><span class="chip open"><span class="cn">未来</span><span class="en">Future</span></span></td><td><span class="cn">早期事故对公众信任的不可逆伤害</span><span class="en">Irreversible trust damage from an early accident</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="timeline" style="grid-template-columns:repeat(4,minmax(0,1fr))">
+          <div><time>2026—2027</time><strong><span class="cn">取证冲刺</span><span class="en">Certification sprint</span></strong><em><span class="cn">载人试飞、PC 审查、首条航线准备</span><span class="en">Manned tests, PC review, first route prep</span></em></div>
+          <div><time>2027—2028</time><strong><span class="cn">首批交付</span><span class="en">First deliveries</span></strong><em><span class="cn">文旅与机场接驳试点</span><span class="en">Tourism and airport pilots</span></em></div>
+          <div><time>2028—2029</time><strong><span class="cn">网络化运营</span><span class="en">Networked operations</span></strong><em><span class="cn">多城市起降点、MRO 体系</span><span class="en">Multi-city vertiports, MRO</span></em></div>
+          <div><time>2030+</time><strong><span class="cn">成本下探</span><span class="en">Cost decline</span></strong><em><span class="cn">多型别、规模化、通勤场景</span><span class="en">Variants, scale, commuting</span></em></div>
+        </div>
+        <p class="tbl-note"><span class="cn">图 6　商业化路径。时间为本文基于公开信息的情景推演，不是企业承诺。</span><span class="en">Figure 6. Commercial path. Timings are scenarios based on public information, not company commitments.</span></p>
+
+        <blockquote class="quote">
+          <p><span class="cn">“安全始终是最高准则。适航取证不是比谁飞得快，而是比谁能在完全符合民航规章的前提下，把安全冗余做足。”</span><span class="en">“Safety is always the highest principle. Certification is not a race to fly first, but to build sufficient redundancy in full compliance with the regulations.”</span></p>
+          <footer><span class="cn">—— 沃飞长空 CEO 兼首席科学家 郭亮，媒体引述</span><span class="en">— Guo Liang, CEO and chief scientist, as quoted in press</span></footer>
+        </blockquote>
+
+        <p><span class="cn">这句话值得认真对待，也应该被认真检验。冗余做足会带来重量、成本与维护负担；在商业压力下，企业是否愿意为“极低概率的灾难性失效”持续投入，是适航文化能否落地的关键。对监管者，这意味着要在审定中坚持独立性；对运营商，这意味着不能把“已取证”当作“零风险”；对乘客，这意味着需要透明的事故与故障披露。</span><span class="en">The statement deserves to be taken seriously — and tested. Redundancy brings weight, cost and maintenance burden; whether a company keeps investing against extremely rare catastrophic failures under commercial pressure is the test of a safety culture. Regulators must stay independent; operators must not equate certification with zero risk; passengers deserve transparent failure disclosure.</span></p>
+      </section>
+
+      <section class="sec" id="limits">
+        <div class="sec-head">
+          <div class="sec-num">11</div>
+          <div><h2><span class="cn">局限与未决问题</span><span class="en">Limitations and open questions</span><span class="sub">What would change the conclusion</span></h2></div>
+        </div>
+
+        <p><span class="cn">本文的结论受制于公开信息的颗粒度。以下六项缺口，任何一项被补齐，都可能改变判断：</span><span class="en">The conclusions are constrained by the granularity of public information. Any of these six gaps, if filled, could change the judgement:</span></p>
+
+        <ol>
+          <li><span class="cn"><b>机载电池总容量与能量管理策略。</b>没有 kWh，就无法验证 200 km 在满载、逆风与备降条件下的真实性，也无法核算电池更换周期与全寿命成本。</span><span class="en"><b>Installed energy and energy management.</b> Without kWh, the 200 km claim under full load, headwind and diversion cannot be verified, nor can pack replacement and lifecycle cost.</span></li>
+          <li><span class="cn"><b>整机灾难性失效概率目标与分配。</b>分系统的 10⁻⁸/FH 不能替代整机安全目标；缺少故障树，就无法判断冗余是否真正独立。</span><span class="en"><b>Whole-aircraft catastrophic target and allocation.</b> Subsystem 10⁻⁸/FH does not replace an aircraft-level objective; without a fault tree, independence cannot be judged.</span></li>
+          <li><span class="cn"><b>过渡走廊、最小安全速度与抗风限值。</b>这些决定起降场净空、航线设计与天气标准，是运行经济性的隐藏变量。</span><span class="en"><b>Transition corridor, minimum safe speed and wind limits.</b> These set obstacle clearance, route design and weather minima — hidden variables in operating economics.</span></li>
+          <li><span class="cn"><b>订单的确认比例与交付窗口。</b>“千余架”若大部分为意向，2028—2030 年的实际交付可能远低于产能规划。</span><span class="en"><b>Firm share and delivery windows.</b> If most of the “thousand-plus” are intentions, actual 2028–30 deliveries may fall well below capacity plans.</span></li>
+          <li><span class="cn"><b>维修成本、保险定价与人员培训体系。</b>这三项决定单位经济，而目前均无公开数据；eVTOL 的保险 actuarial 数据几乎为零。</span><span class="en"><b>Maintenance, insurance and training.</b> These determine unit economics and are undisclosed; actuarial data for eVTOL is nearly non-existent.</span></li>
+          <li><span class="cn"><b>海外适航与知识产权。</b>未检索到 EASA/FAA 正式申请或双边互认安排；海外收入假设缺乏监管基础。</span><span class="en"><b>Overseas certification and IP.</b> No EASA/FAA filing or bilateral arrangement was found; export revenue lacks a regulatory basis.</span></li>
+        </ol>
+
+        <div class="callout">
+          <b><span class="cn">未来 12 个月应追踪的六个信号</span><span class="en">Six signals to watch over the next 12 months</span></b>
+          <p><span class="cn">① CAAC 是否颁发 TC；② PC 审查是否完成；③ 首架交付客户与航线；④ 成都基地实际产能与下线节奏；⑤ 是否发生任何飞行事故或严重事件；⑥ 是否启动 EASA/FAA 或中东/东南亚的型号认可申请。前两项决定“能不能卖”，后四项决定“卖了之后能不能持续”。</span><span class="en">① CAAC TC issuance; ② PC completion; ③ first delivery customer and route; ④ actual Chengdu output; ⑤ any accident or serious incident; ⑥ EASA/FAA or regional validation filings. The first two decide whether it can sell; the last four whether it can sustain.</span></p>
+        </div>
+
+        <p><span class="cn">最后需要说明本文的立场：<b>对 AE200 的技术成就不作贬低，对它的商业前景不作拔高。</b>它确实完成了很多同行没有完成的工程科目，也确实还没有回答“谁能长期为它买单”。把这两句话同时说清楚，比选边站更有价值。</span><span class="en">A final note on stance: <b>neither diminish AE200’s engineering achievement nor inflate its commercial prospects.</b> It has done engineering work many peers have not, and it has not yet answered who pays for it sustainably. Holding both statements is more useful than picking a side.</span></p>
+      </section>
+
+      <section class="sec" id="references">
+        <div class="sec-head">
+          <div class="sec-num">12</div>
+          <div><h2><span class="cn">参考文献</span><span class="en">References</span><span class="sub">Accessed 24 November 2026</span></h2></div>
+        </div>
+
+        <p class="small"><span class="cn">引用采用 GB/T 7714—2015 顺序编码制。访问日期统一为 2026-11-24。企业材料用于识别研究对象与公开承诺，不构成第三方验证。</span><span class="en">References follow GB/T 7714—2015 numeric style; access date 24 November 2026. Company material identifies the subject and public commitments; it is not third-party validation.</span></p>
+
+        <ol class="references">
+          <li id="ref1">沃飞长空. AE200 系列产品页[EB/OL]. 2026-01-14[2026-11-24]. <a href="https://www.aerofugia.com/news/307" target="_blank" rel="noopener">https://www.aerofugia.com/news/307</a>.</li>
+          <li id="ref2">沃飞长空. AE200 系列：城市空中出行[EB/OL]. [2026-11-24]. <a href="https://www.aerofugia.com/businesscenter/uam" target="_blank" rel="noopener">https://www.aerofugia.com/businesscenter/uam</a>.</li>
+          <li id="ref3">中国民用航空局. 关于就沃飞长空 AE200-100 型电动垂直起降航空器型号合格审定项目专用条件征求意见的通知[EB/OL]. 2023-12-01[2026-11-24]. <a href="http://app.caac.gov.cn/PHONE/HDJL/YJZJ/202312/t20231201_222195.html" target="_blank" rel="noopener">app.caac.gov.cn</a>.</li>
+          <li id="ref4">中国民用航空局. 沃飞 AE200-100 型电动垂直起降航空器专用条件（征求意见稿，SC-21-006）[R]. 2023-12.</li>
+          <li id="ref5">澎湃新闻. 线上看展｜适航+运营双突破！沃飞长空携最新成果亮相民航科创展[EB/OL]. 2025-05-27[2026-11-24]. <a href="https://m.thepaper.cn/newsDetail_forward_30890141" target="_blank" rel="noopener">m.thepaper.cn</a>.</li>
+          <li id="ref6">人民网四川. 布局三大方向，低空出行正一步步成为现实：成都造“飞行汽车”年内有望量产[EB/OL]. 2026-03-07[2026-11-24]. <a href="http://sc.people.com.cn/n2/2026/0307/c345167-41517355.html" target="_blank" rel="noopener">sc.people.com.cn</a>.</li>
+          <li id="ref7">南阳新媒. 沃飞长空 AE200 系列适航取证进入冲刺：倾转旋翼 eVTOL 距离商业载客还有多远？[EB/OL]. 2026-11-17[2026-11-24]. <a href="http://nypubweb.nydt.cn/nygc/article/1/2122517836389507074" target="_blank" rel="noopener">nypubweb.nydt.cn</a>.</li>
+          <li id="ref8">华创证券. 低空经济周报（第 68 期）：沃飞长空科创板上市辅导已备案[R/OL]. 2026-04-06[2026-11-24]. <a href="http://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/search/rptid/828795846211/index.phtml" target="_blank" rel="noopener">stock.finance.sina.com.cn</a>.</li>
+          <li id="ref9">知乎专栏. 从“峨眉山”到“大渡河”，沃飞长空两颗“中国心”引爆全场[EB/OL]. 2026-03-18[2026-11-24]. <a href="https://zhuanlan.zhihu.com/p/2018014968356828144" target="_blank" rel="noopener">zhuanlan.zhihu.com</a>.</li>
+          <li id="ref10">证券日报. 沃飞长空航空动力电池采用半固态电芯并完成装机试飞[N/OL]. 2026-02-12[2026-11-24]. <a href="http://m.epaper.zqrb.cn/html/2026-02/12/content_1220188.htm" target="_blank" rel="noopener">m.epaper.zqrb.cn</a>.</li>
+          <li id="ref11">沃飞长空. 沃飞长空的电池有多强大[EB/OL]. [2026-11-24]. <a href="http://www.aerofugia.com/news/313" target="_blank" rel="noopener">aerofugia.com/news/313</a>.</li>
+          <li id="ref12">中国航空新闻网. 沃飞长空为 AE200 设计动力电池安全保障系统，失效率达 10⁻⁸ 至 10⁻⁹ 级别[EB/OL]. 2025-09-24[2026-11-24]. <a href="http://www.chinaerospace.com/article/show/a3bbc98b22d34c98fd955edc9769f8da" target="_blank" rel="noopener">chinaerospace.com</a>.</li>
+          <li id="ref13">湖北日报. 沃飞长空移动储能充电站：264 kWh、20 分钟补能[EB/OL]. 2026-07-01[2026-11-24]. <a href="https://news.hubeidaily.net/pc/c_5705149.html" target="_blank" rel="noopener">news.hubeidaily.net</a>.</li>
+          <li id="ref14">沃飞长空. 高度集成航电计算平台[EB/OL]. [2026-11-24]. <a href="https://www.aerofugia.com/news/316" target="_blank" rel="noopener">aerofugia.com/news/316</a>.</li>
+          <li id="ref15">上海证券报. 沃飞长空完成股改，控股股东持股 40.02%[N/OL]. 2026-04-03[2026-11-24]. <a href="https://www.cnstock.com/commonDetail/664968" target="_blank" rel="noopener">cnstock.com</a>.</li>
+          <li id="ref16">红星新闻. 沃飞长空董事长、法定代表人工商变更[EB/OL]. 2026-08-13[2026-11-24]. <a href="https://sc.cri.cn/n/20260813/92a413e5-db8c-42db-8d26-60e5299ebc75.html" target="_blank" rel="noopener">sc.cri.cn</a>.</li>
+          <li id="ref17">21 世纪经济报道. 沃飞长空完成近 10 亿元 D 轮融资[EB/OL]. 2026-04-14[2026-11-24]. <a href="https://m.21jingji.com/article/20260414/herald/43173e2ff9e4ef43833455e7258df2e9.html" target="_blank" rel="noopener">m.21jingji.com</a>.</li>
+          <li id="ref18">四川在线. 沃飞长空与川发租赁达成 200 架 AE200 意向采购[EB/OL]. 2025-09-18[2026-11-24]. <a href="https://sichuan.scol.com.cn/ggxw/202509/83122221.html" target="_blank" rel="noopener">sichuan.scol.com.cn</a>.</li>
+          <li id="ref19">锦观新闻. 中航租赁、苏银金租合计采购 300 架 AE200[EB/OL]. 2026-01-07[2026-11-24]. <a href="https://www.sohu.com/a/973631611_355475" target="_blank" rel="noopener">sohu.com</a>.</li>
+          <li id="ref20">新华财经. 华龙航空与沃飞长空签署 50 架 AE200 确认订单[EB/OL]. 2025-11-27[2026-11-24]. <a href="https://m.cnfin.com/gs-lb//zixun/20251127/4341649_1.html" target="_blank" rel="noopener">m.cnfin.com</a>.</li>
+          <li id="ref21">凤凰网科技. 吉利首款飞行汽车 AE200 完成试飞：最大起飞重量 2,500 kg[EB/OL]. 2024-06-23[2026-11-24]. <a href="https://news.ifeng.com/c/8aeImPZTfSA" target="_blank" rel="noopener">news.ifeng.com</a>.</li>
+          <li id="ref22">易车. 飞行汽车售价：沃飞长空 AE200 定价逻辑与行业价格密码[EB/OL]. 2026-08-06[2026-11-24]. <a href="https://www.bitauto.com/article/1003112068933/" target="_blank" rel="noopener">bitauto.com</a>.</li>
+          <li id="ref23">网易. 沃飞长空“三鸟台”与倾转机构振动试验[EB/OL]. 2026-11-05[2026-11-24]. <a href="https://www.163.com/dy/article/LAVO90QL05149OCK.html" target="_blank" rel="noopener">163.com</a>.</li>
+          <li id="ref24">飞象网. 沃飞长空 AE200 采用非相似多余度飞控与 SVO1 辅助驾驶[EB/OL]. 2025-12-30[2026-11-24]. <a href="https://www.cctime.com/html/2025-12-30/1726464.htm" target="_blank" rel="noopener">cctime.com</a>.</li>
+          <li id="ref25">荆楚网. 沃飞长空：全剖面坠撞保护与水上迫降漂浮技术[EB/OL]. 2024-04-29[2026-11-24]. <a href="http://www.cnhubei.com/pcmedia/detail?id=1730300" target="_blank" rel="noopener">cnhubei.com</a>.</li>
+          <li id="ref26">EUROPEAN UNION AVIATION SAFETY AGENCY. Special Condition for VTOL and Means of Compliance: SC-VTOL-01[S/OL]. 2019[2026-11-24]. <a href="https://www.easa.europa.eu/en/document-library/product-certification-consultations/special-condition-vtol" target="_blank" rel="noopener">easa.europa.eu</a>.</li>
+          <li id="ref27">OFweek 机器人. 亿航智能 EH216-S 交付与运营数据[EB/OL]. 2026-08-10[2026-11-24]. <a href="https://robot.ofweek.com/2026-08/ART-8321204-12003-30697818.html" target="_blank" rel="noopener">robot.ofweek.com</a>.</li>
+          <li id="ref28">新浪财经. 成都低空出行：天府机场至市区 15 分钟，两年布设 100+ 起降点[EB/OL]. 2025-05-13[2026-11-24]. <a href="https://finance.sina.com.cn/wm/2025-05-13/doc-inewmtfr0009395.shtml" target="_blank" rel="noopener">finance.sina.com.cn</a>.</li>
+          <li id="ref29">峰飞航空. V2000EM 盛世龙[EB/OL]. [2026-11-24]. <a href="https://www.autoflight.com/zh/v2000em/" target="_blank" rel="noopener">autoflight.com</a>.</li>
+          <li id="ref30">科技日报. 小鹏汇天 A868 完成全尺寸倾转过渡飞行[EB/OL]. 2026-11-23[2026-11-24]. <a href="https://www.stdaily.com/web/gdxw/2026-11/23/content_617811.html" target="_blank" rel="noopener">stdaily.com</a>.</li>
+          <li id="ref31">中国经济时报. 时的科技 E20 适航审定进展[EB/OL]. 2026-05-27[2026-11-24]. <a href="https://lib.cet.com.cn/paper/szb_con/543392.html" target="_blank" rel="noopener">lib.cet.com.cn</a>.</li>
+          <li id="ref32">JOBY AVIATION. Aircraft and technology[EB/OL]. [2026-11-24]. <a href="https://www.jobyaviation.com/" target="_blank" rel="noopener">jobyaviation.com</a>.</li>
+          <li id="ref33">ARCHER AVIATION. Midnight[EB/OL]. [2026-11-24]. <a href="https://www.archer.com/" target="_blank" rel="noopener">archer.com</a>.</li>
+          <li id="ref34">中国政府网. 2024 年政府工作报告[EB/OL]. 2024-03[2026-11-24]. <a href="https://www.gov.cn/zhengce/jiedu/tujie/202403/content_6937462.htm" target="_blank" rel="noopener">gov.cn</a>.</li>
+          <li id="ref35">证券时报. 2026 年政府工作报告将低空经济定位为新兴支柱产业[N/OL]. 2026-03-06[2026-11-24]. <a href="https://stcn.com/article/detail/3664305.html" target="_blank" rel="noopener">stcn.com</a>.</li>
+          <li id="ref36">央广网. 新修订《中华人民共和国民用航空法》通过，2026 年 7 月 1 日施行[EB/OL]. 2025-12-28[2026-11-24]. <a href="https://news.cnr.cn/native/gd/kx/20251228/t20251228_527475340.shtml" target="_blank" rel="noopener">news.cnr.cn</a>.</li>
+          <li id="ref37">市场监管总局等十部门. 低空经济标准体系建设指南（2025 年版）[EB/OL]. 2026-02[2026-11-24]. <a href="http://big5.www.gov.cn/gate/big5/www.gov.cn/lianbo/202602/content_7056842.htm" target="_blank" rel="noopener">gov.cn</a>.</li>
+          <li id="ref38">中国民用机场协会. 电动垂直起降航空器（eVTOL）起降场技术需求：T/CCAATB 0048—2024[S]. 2024-05.</li>
+          <li id="ref39">中国新闻网. 沃飞长空发布 AE200 文旅优化 6 座样机[EB/OL]. 2026-07-27[2026-11-24]. <a href="https://m.chinanews.com/wap/detail/chs/zw/446198.shtml" target="_blank" rel="noopener">chinanews.com</a>.</li>
+          <li id="ref40">界面新闻. 长春航展两架 eVTOL 接触，一架着陆起火[EB/OL]. 2025-09-16[2026-11-24]. <a href="https://www.sohu.com/a/935583132_313745" target="_blank" rel="noopener">sohu.com</a>.</li>
+          <li id="ref41">东方财富网. 赛迪：2025 年中国低空经济核心产业规模约 8,591.7 亿元[EB/OL]. 2026-01-29[2026-11-24]. <a href="https://finance.eastmoney.com/a/202601293635029193.html" target="_blank" rel="noopener">finance.eastmoney.com</a>.</li>
+          <li id="ref42">央广网. 民航局：2025 年低空经济全产业链规模达 1.5 万亿元[EB/OL]. 2026-04-01[2026-11-24]. <a href="http://news.youth.cn/jsxw/202604/t20260401_16586637.htm" target="_blank" rel="noopener">news.youth.cn</a>.</li>
+          <li id="ref43">上海证券报. 亿航智能 2026 年二季度收入 7,790 万元，撤回全年指引[N/OL]. 2026-08-26[2026-11-24]. <a href="https://www.cnstock.com/commonDetail/775272" target="_blank" rel="noopener">cnstock.com</a>.</li>
+        </ol>
+
+        <p class="small" style="margin-top:26px"><span class="cn">图片来源：沃飞长空官方媒体素材（aerofugia.com），仅用于识别研究对象；不构成对图片内容、性能或适航状态的背书。图表由本文绘制。</span><span class="en">Images: Volant Aerotech official media assets, used solely to identify the subject; no endorsement of performance or certification status. Figures drawn by this study.</span></p>
+      </section>
+
+    </article>
+
+    <aside class="rail" aria-label="证据说明">
+      <p class="rail-title"><span class="cn">如何阅读</span><span class="en">How to read</span></p>
+      <ul>
+        <li><strong><span class="cn">官方披露</span><span class="en">Official</span></strong><span class="cn">企业官网、发布会、官方图片。证明“企业这样说过”。</span><span class="en">Company sites, launches, imagery: what the company said.</span></li>
+        <li><strong><span class="cn">外部证据</span><span class="en">External</span></strong><span class="cn">民航局文件、标准、主流媒体与研报。用于交叉核验。</span><span class="en">CAAC documents, standards, press: used for triangulation.</span></li>
+        <li><strong><span class="cn">本文估算</span><span class="en">Estimate</span></strong><span class="cn">能量、成本与敏感性模型，只作数量级判断。</span><span class="en">Energy, cost and sensitivity models: order of magnitude only.</span></li>
+        <li><strong><span class="cn">未决问题</span><span class="en">Open</span></strong><span class="cn">参数、安全论证或监管状态缺失，不作推测。</span><span class="en">Missing parameters, safety case or regulatory status; not guessed.</span></li>
+      </ul>
+      <p class="rail-note"><span class="cn">本文为独立研究汇编，与沃飞长空无隶属或商业关系。文中的“领先”“首个”均限定在所述条件与时间点内。</span><span class="en">Independent research; no affiliation with Volant. “First” and “leading” are bounded by the stated conditions and date.</span></p>
+    </aside>
+  </div>
+</div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <p><b><span class="cn">沃飞长空 AE200：技术、场景与市场可行性</span><span class="en">Volant Aerotech AE200: Technology, Operations and Market Feasibility</span></b></p>
+        <p><span class="cn">低空交通案例研究组 · 案例 02 · 证据截止 2026-11-24 · 版本 1.0</span><span class="en">Low-Altitude Mobility Case Group · Case 02 · Evidence cut-off 24 Nov 2026 · v1.0</span></p>
+        <p><span class="cn">本文为课程与研究用途的独立分析，不构成投资建议；所有参数以中国民用航空局最终批准的型号数据表为准。</span><span class="en">Independent analysis for teaching and research; not investment advice. CAAC-approved type data prevails.</span></p>
+      </div>
+      <div>
+        <p><b><span class="cn">引用与许可</span><span class="en">Citation and licence</span></b></p>
+        <p><span class="cn">文字内容采用 CC BY-NC 4.0 许可；图片版权归沃飞长空所有，转载请联系权利人。</span><span class="en">Text under CC BY-NC 4.0; images © Volant Aerotech, contact the rights holder for reuse.</span></p>
+        <p><a class="backlink" href="#top">↑ <span class="cn">回到顶部</span><span class="en">Back to top</span></a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var body=document.body;
+  var nav=document.getElementById('siteNav');
+  var toggle=document.getElementById('navToggle');
+  var progress=document.getElementById('progress');
+  var langBtn=document.getElementById('langBtn');
+
+  // mobile nav
+  if(toggle){toggle.addEventListener('click',function(){
+    var open=nav.classList.toggle('nav-open');
+    toggle.setAttribute('aria-expanded',open?'true':'false');
+  });}
+  document.querySelectorAll('#navLinks a').forEach(function(a){
+    a.addEventListener('click',function(){nav.classList.remove('nav-open');});
+  });
+
+  // language
+  function setLang(en){
+    body.classList.toggle('E',en);
+    langBtn.textContent=en?'中文':'EN';
+    langBtn.setAttribute('aria-label',en?'切换到中文':'Switch to English');
+    document.documentElement.lang=en?'en':'zh-CN';
+    try{localStorage.setItem('ae200-lang',en?'en':'zh');}catch(e){}
+  }
+  var saved=null;
+  try{saved=localStorage.getItem('ae200-lang');}catch(e){}
+  if(saved==='en'){setLang(true);}
+  langBtn.addEventListener('click',function(){setLang(!body.classList.contains('E'));});
+
+  // progress
+  function onScroll(){
+    var h=document.documentElement;
+    var max=h.scrollHeight-h.clientHeight;
+    var y=h.scrollTop||body.scrollTop;
+    progress.style.width=(max>0?(y/max*100):0)+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+
+  // TOC active
+  var links=Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  var map={};
+  links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  var sections=Array.prototype.slice.call(document.querySelectorAll('.article > section'));
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          links.forEach(function(a){a.classList.remove('active');});
+          var a=map[en.target.id];
+          if(a){a.classList.add('active');}
+        }
+      });
+    },{rootMargin:'-20% 0px -65% 0px',threshold:0});
+    sections.forEach(function(s){io.observe(s);});
+
+    var ro=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){en.target.classList.add('in');ro.unobserve(en.target);}
+      });
+    },{rootMargin:'0px 0px -8% 0px',threshold:0.05});
+    document.querySelectorAll('.sec').forEach(function(s){s.classList.add('reveal');ro.observe(s);});
+  }
+})();
+</script>
+</body>
+</html>
